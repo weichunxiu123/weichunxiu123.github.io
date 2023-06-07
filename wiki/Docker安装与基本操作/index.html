@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Docker安装与基本操作 | Hexo</title>
+    
+    
+        <meta name="keywords" content="Docker安装与基本操作">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="一、安装docker（1）卸载（可选） 如果之前安装过旧版本的Docker，可以使用下面命令卸载： 1234567891011yum remove docker \docker-client \docker-client-latest \docker-common \docker-latest \docker-latest-logrotate \docker-logrotate \docker-s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker安装与基本操作">
+<meta property="og:url" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、安装docker（1）卸载（可选） 如果之前安装过旧版本的Docker，可以使用下面命令卸载： 1234567891011yum remove docker \docker-client \docker-client-latest \docker-common \docker-latest \docker-latest-logrotate \docker-logrotate \docker-s">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps45.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps46.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps47.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps48.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps49.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps50.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps51.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps52.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps53.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps54.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps55.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps56.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps57.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps58.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps59.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps60.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps61.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps62.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps63.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps64.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps65.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps66.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps67.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps68.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps69.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps70.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps71.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps72.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps73.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps74.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps75.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps76.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps77.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps78.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps79.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps80.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps81.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps82.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps83.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps84.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps85.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps86.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps87.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps88.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps89.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps90.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps91.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps92.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps93.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps94.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps95.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps96.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps97.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps98.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps99.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps100.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps101.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps102.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps103.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps104.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps105.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps106.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps107.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps108.jpg">
+<meta property="og:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps109.jpg">
+<meta property="article:published_time" content="2023-06-07T10:25:11.000Z">
+<meta property="article:modified_time" content="2023-06-07T11:33:29.117Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps45.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Docker安装与基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+            <time datetime="2023-06-07T10:25:11.000Z" itemprop="datePublished">2023-06-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/raw/master/source/_posts/Docker安装与基本操作.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/edit/master/source/_posts/Docker安装与基本操作.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/commits/master/source/_posts/Docker安装与基本操作.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Docker安装与基本操作
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85docker"><span class="toc-number">1.</span> <span class="toc-text">一、安装docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="一、安装docker"><a href="#一、安装docker" class="headerlink" title="一、安装docker"></a>一、<strong>安装docker</strong></h2><p>（1）卸载（可选）</p>
+<p>如果之前安装过旧版本的Docker，可以使用下面命令卸载：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-selinux \</span><br><span class="line">docker-engine-selinux \</span><br><span class="line">docker-engine \</span><br><span class="line">docker-ce</span><br></pre></td></tr></table></figure>
+
+<p>（2）yum源配置</p>
+<p>1.备份配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps45.jpg" alt="img" style="zoom:110%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo [http://mirrors.aliyun](http://mirrors.aliyun.com/repo/Centos-7.repo).com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps46.jpg" alt="img" style="zoom:110%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/epel.repo [http://mirrors.aliyun.com/rep](http://mirrors.aliyun.com/repo/epel-7.repo)o/epel-7.repo</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps47.jpg" alt="img" style="zoom:110%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps48.jpg" alt="img" style="zoom:90%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps49.jpg" style="zoom:120%;">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y bash-completion vim lrzsz wget expect net-tools nc nmap treedos2unix htop iftop iotop unzip telnet sl psmisc nethogs glances bc ntpdate openldap-devel</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps50.jpg" alt="img" style="zoom:115%;">
+
+<p><em><strong>*安装docker*</strong></em></p>
+<p>（1）受限需要虚拟机联网，安装yum工具</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps51.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（2）配置网卡转发</p>
+<p>1）docker必须安装在centos7平台，内核版本不低于3.10在centos平台运行docker可能会遇见些告警信息，修改内核配置参数，打开内核转发功能</p>
+<p>#写入</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps52.jpg" alt="img" style="zoom:110%;"> 
+
+<p>2）重新加载内核参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modprobe br_netfilter</span><br><span class="line"></span><br><span class="line">sysctl -p /etc/sysctl.d/docker.conf</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps53.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（3）利用yum进行docker安装</p>
+<p>提前配置好yum仓库</p>
+<p>1）阿里云自带仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/Centos-7.repo [http://mirrors.aliyun.com/repo/](http://mirrors.aliyun.com/repo/Centos-7.repo)Centos-7.repo</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps54.jpg" alt="img" style="zoom:110%;"> 
+
+<p> 2）阿里云提供的docker专属repo仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl-o/etc/yum.repos.d/docker-ce.repohttp://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps55.jpg" alt="img" style="zoom:110%;"> 
+
+<p>3）更新yum缓存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps56.jpg" alt="img" style="zoom:110%;"> 
+
+<p>4）查看源中可用版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps57.jpg" alt="img" style="zoom:110%;"> 
+
+<p>5）yum安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce -y</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps58.jpg" alt="img" style="zoom:110%;">
+
+<p>docker -v</p>
+<p><img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps59.jpg" alt="img"> </p>
+<p>卸载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove -y docker-ce-xxx</span><br></pre></td></tr></table></figure>
+
+<p>（4）配置镜像加速器</p>
+<p>用于加速镜像文件下载,选用阿里云镜像站</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/docker</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps60.jpg" alt="img" style="zoom:110%;"> 
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps61.jpg" alt="img" style="zoom:110%;"> 
+
+<p>1）进入文件vim &#x2F;etc&#x2F;docker&#x2F;daemon.json编写以下内容：</p>
+<p>{“registry-mirrors” : [“<a target="_blank" rel="external nofollow noopener noreferrer" href="https://8xpk5wnt.mirror.aliyuncs.com" ]}">https://8xpk5wnt.mirror.aliyuncs.com&quot;]}</a></p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps62.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（5）启动docker</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）关闭防火墙：systemctl stop firewalld</span><br><span class="line">2）禁止开机启动防火墙：systemctl disable firewalld</span><br><span class="line">3）查看防火墙状态：systemctl status firewalld</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps63.jpg" alt="img" style="zoom:110%;"> 
+
+<p>通过命令启动docker：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker  启动docker服务</span><br><span class="line"></span><br><span class="line">systemctl stop docker  停止docker服务</span><br><span class="line"></span><br><span class="line">systemctl restart docker  重启docker服务</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps64.jpg" alt="img" style="zoom:100%;"> 
+
+<p>docker配置文件重新加载：systemctl daemon-reload</p>
+<p>设置开启自启动：systemctl enable docker</p>
+<p>（6）查看docker信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps65.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（7）显示当前正在运行的容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps66.jpg" alt="img" style="zoom:100%;">
+
+<p>（8）docker镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps67.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（9）docker版本：docker version</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-client</span><br><span class="line">which docker</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps68.jpg" alt="img" style="zoom:100%;"> 
+
+<p>docker daemon，运行在docker host上，负责创建、运行、监控容器、构建、存储镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux |grep docker</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps69.jpg" alt="img" style="zoom:100%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">containerd</span><br><span class="line">ps aux|grep containerd</span><br><span class="line">systemctl status containerd</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps70.jpg" alt="img" style="zoom:110%;"> 
+
+
+
+<p><em><strong>*docker的基本操作*</strong></em></p>
+<p>\1. 启动第一个docker容器</p>
+<p>Nginx web服务器，运行一个80端口的网站</p>
+<p>在宿主机上，运行Nginx</p>
+<p>开启服务器</p>
+<p>2.在服务器上安装好运行nginx所需的依赖关系</p>
+<p>3.安装nginx yum install nginx -y</p>
+<p>4.修改nginx配置文件</p>
+<p>5.启动nginx</p>
+<p>6.客户端去访问nginx</p>
+<p>（1）查看本地的docker镜像有哪些：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls 或 docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps71.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（2）可选择删除旧版本：docker rmi 镜像id</p>
+<p>（3）搜索一下远程仓库中的镜像文件是否存在：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search nginx</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps72.jpg" alt="img" style="zoom:100%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps73.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（4）再次查看镜像：docker images</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps74.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（5）运行镜像，运行出具体内容，在容器中就跑着一个nginx服务，docker run 参数 镜像的名字&#x2F;id</p>
+<p>#-d 后台运行容器</p>
+<p>#-p 80:80 端口映射，宿主机端口：容器内端口，访问宿主机的80端口，也就访问到容器中的80端口，会返回一个容器的id</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 nginx</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps75.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（6）查看容器是否在运行：docker ps</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps76.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（7）访问网站192.168.88.163:80</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps77.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（8）停止容器：docker stop 容器id</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps78.jpg" alt="img" style="zoom:90%;"> 
+
+<p>（9）恢复容器：docker start 容器id</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps79.jpg" alt="img" style="zoom:90%;"> 
+
+ 
+
+<p><em><strong>*docker镜像原理*</strong></em></p>
+<p>（1）查看发行版： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/redhat-release </span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps80.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（2）查看内核：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps81.jpg" alt="img" style="zoom:100%;">
+
+<p>（3）利用docker获取不同的发行版镜像（例如centos：7.8.2003）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos:7.8.2003</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps82.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（4）确认当前宿主机的发行版：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/redhat-release</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps83.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（5）运行centos:7.8.2003发行版本</p>
+<p>#运行容器，且进入容器内部</p>
+<p>#参数解释，-i 交互式命令操作 -t 开启一个终端 bash 进入容器后执行的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it afb6fca791e0 bash</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps84.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（6）退出容器空间：exit</p>
+<p><em><strong>*获取镜像*</strong></em></p>
+<p>（1）docker search 镜像名:tag tag就是具体的标签版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search centos</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps85.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（2）查看docker镜像的存储路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info |grep Root</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps86.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（3）具体位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /var/lib/docker/image/overlay2/imagedb/content/sha256</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps87.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（4）使用不同的镜像，生成容器# -it 开启一个交互式的终端–rm 容器退出时删除该容器</p>
+<p>#再运行一个7.8centos</p>
+<p>docker run -it –rm centos bash</p>
+<p><em><strong>*查看镜像*</strong></em></p>
+<p>（1）查看所有镜像：docker images</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps88.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（2）指定tag查看：docker images centos:7.8.2003</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps89.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（3）只列出镜像id  #-q –quiet 只列出id：docker images -q</p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps90.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（4）格式化显示镜像</p>
+<p># 这是docker的模板语言，–format</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images --format &quot;&#123;&#123;.ID&#125;&#125;--&#123;&#123;.Repository&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps91.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>*删除镜像*</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（1）删除容器记录：docker rm 容器id</span><br><span class="line">（2）指定id的前三位即可：docker rmi 镜像id</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>*镜像管理*</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">（1）批量删除镜像，慎用：docker rmi &#x27;docker images -aq&#x27;</span><br><span class="line">（2）批量删除容器：docker rm &#x27;docker ps -aq&#x27;</span><br><span class="line">（3）导出镜像：docker save -o nginx.tgz nginx:latest#打包tar包</span><br><span class="line"></span><br><span class="line">（4）导入镜像</span><br><span class="line">先删除本地的nginx镜像：docker rmi centos:7.8.2003</span><br><span class="line">docker image load -i /export/software/centos1.8.2003.tgz#重新加载nginx-tar包</span><br><span class="line">查看cocker服务的信息：docker info</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps92.jpg" alt="img" style="zoom:100%;"> 
+
+<p>查看镜像详细信息：docker image inspact 镜像id</p>
+<p><em><strong>*docker镜像管理练习*</strong></em></p>
+<p>（1）去DockerHub搜索Redies</p>
+<p>（2）利用docker pull命令拉去镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps93.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（3）查看Redies镜像的名称和版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search redis</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps94.jpg" alt="img" style="zoom:110%;"> 
+
+<p>（4）利用docker save命令将redies:latest打包为一个redies.tar包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o redis.tar redis:latest</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps95.jpg" alt="img" style="zoom:100%;">
+
+<p>（5）利用docker rmi删除本地的redis:latest </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi redis:latest</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps96.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（6）利用docker load重新加载Redis.tar文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i redis.tar</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps97.jpg" alt="img" style="zoom:100%;"> 
+
+
+
+<p><em><strong>*容器操作*</strong></em></p>
+<p>1）创建并运行mn容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mn -p 80:80 -d nginx</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps98.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）运行刚刚创建的nginx容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mn bash</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps99.jpg" alt="img" style="zoom:90%;">
+
+<p>3） 进入nginx的HTML所在目录 &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/nginx/html</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps100.jpg" alt="img" style="zoom:100%;"> 
+
+<p>4） 修改index.html的内容</p>
+<p>sed -i -e ‘s#Welcome to nginx#人工智能学院欢迎您#g’ -e ‘s#<head>#<head><meta charset="utf-8">#g’ index.html</head></head></p>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps101.jpg" alt="img" style="zoom:110%;"> 
+
+ 
+
+<p><em><strong>*创建和查看数据卷*</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.创建数据卷</span><br><span class="line">docker volume create html</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps102.jpg" alt="img" style="zoom:100%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2.查看所有数据</span><br><span class="line">docker volume ls</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps103.jpg" alt="img" style="zoom:100%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3.查看数据卷详细信息卷</span><br><span class="line">docker volume inspect html</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps104.jpg" alt="img" style="zoom:110%;"> 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">4.挂载数据卷</span><br><span class="line"></span><br><span class="line">（1）创建容器并挂载数据卷到容器内的HTML目录，把/export/data/docker-data/nginx-html/数据卷挂载到容器内的/user/share/nginx/html目录中：</span><br><span class="line">docker run --name mn -v /export/data/docker-data/nginx-html/:/usr/share/nginx/html -p 80:80 -d nginx</span><br><span class="line"></span><br><span class="line">（2）进入html数据卷所在位置，并修改HTML内容,查看html数据卷的位置：</span><br><span class="line">docker volume inspect /export/data/docker-data/nginx-html/</span><br><span class="line"></span><br><span class="line">（3）进入该目录</span><br><span class="line">cd /export/data/docker-data/nginx-html/_data</span><br><span class="line"></span><br><span class="line">（4）修改文件vi index.html</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>*Docker应用部署*</strong></em></p>
+<ol>
+<li><p>搜索mysql镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure></li>
+</ol>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps105.jpg" alt="img" style="zoom:100%;"> 
+
+<ol start="2">
+<li>拉取mysql镜像</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.6</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps106.jpg" alt="img" style="zoom:100%;"> 
+
+ 
+
+<ol start="3">
+<li>创建容器，设置端口映射、目录映射</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /export/data/docker-data/mysql</span><br><span class="line">cd /export/data/docker-data/mysql</span><br><span class="line">docker run -id \</span><br><span class="line">-p 3306:3306 \</span><br><span class="line">--name=bigdata_mysql \</span><br><span class="line">-v $PWD/conf:/etc/mysql/conf.d \</span><br><span class="line">-v $PWD/logs:/logs \</span><br><span class="line">-v $PWD/data:/var/lib/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=hadoop \</span><br><span class="line">mysql:5.7.29</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps107.jpg" alt="img" style="zoom:100%;"> 
+
+<ol start="4">
+<li>进入容器，操作mysql</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec –it bigdata_mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps108.jpg" alt="img" style="zoom:100%;"> 
+
+<ol start="5">
+<li>使用外部机器连接容器中的mysql</li>
+</ol>
+<img src="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/wps109.jpg" alt="img" style="zoom:100%;"> 
+
+ 
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<p>docker应用部署</p>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Git安装与配置</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            John Doe &copy; 2023 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
