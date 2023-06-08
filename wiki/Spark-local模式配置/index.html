@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Hexo</title>
+    <title>Spark--local模式配置 | Hexo</title>
     
     
-        <meta name="keywords" content="Hexo">
+        <meta name="keywords" content="Spark--local模式配置">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="title: Spark–local模式配置toc: truedate: 2023-06-07 19:38:25tags:categories: spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n">
+    <meta name="description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n pyspark python&#x3D;3.8conda activate pysparkpip install pyhive pyspark jieba">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Spark--local模式配置">
 <meta property="og:url" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: Spark–local模式配置toc: truedate: 2023-06-07 19:38:25tags:categories: spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n">
+<meta property="og:description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n pyspark python&#x3D;3.8conda activate pysparkpip install pyhive pyspark jieba">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
 <meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
@@ -33,8 +33,8 @@
 <meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/image-20230607195152782.png">
 <meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps126.jpg">
 <meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps128.jpg">
-<meta property="article:published_time" content="2023-06-07T11:38:25.725Z">
-<meta property="article:modified_time" content="2023-06-07T12:13:10.342Z">
+<meta property="article:published_time" content="2023-06-07T11:38:25.000Z">
+<meta property="article:modified_time" content="2023-06-08T01:13:56.711Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
@@ -192,15 +192,59 @@
     <div class="article-inner">
         
         
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">
+            <time datetime="2023-06-07T11:38:25.000Z" itemprop="datePublished">2023-06-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/raw/master/source/_posts/Spark-local模式配置.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/edit/master/source/_posts/Spark-local模式配置.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/commits/master/source/_posts/Spark-local模式配置.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Spark--local模式配置
+        </h1>
+    
+
+            </header>
+        
         
         <div class="article-entry" itemprop="articleBody">
         
         
             
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#spark%EF%BC%88local%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">spark（local环境部署）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
         
         
-            <p>title: Spark–local模式配置<br>toc: true<br>date: 2023-06-07 19:38:25<br>tags:<br>categories:</p>
-<h2 id="spark（local环境部署）"><a href="#spark（local环境部署）" class="headerlink" title="spark（local环境部署）"></a><strong>spark（local<strong><strong>环境部署</strong></strong>）</strong></h2><p>（1）安装Anaconda</p>
+            <h2 id="spark（local环境部署）"><a href="#spark（local环境部署）" class="headerlink" title="spark（local环境部署）"></a><strong>spark（local<strong><strong>环境部署</strong></strong>）</strong></h2><p>（1）安装Anaconda</p>
 <p>上传安装包 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
 
