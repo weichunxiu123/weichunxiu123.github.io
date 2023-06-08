@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://weichunxiu123.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://weichunxiu123.github.io/"/>
   <updated>2023-06-08T03:30:29.005Z</updated>
-  <id>http://example.com/</id>
+  <id>https://weichunxiu123.github.io/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Spark-pyspark基础编码环境</title>
-    <link href="http://example.com/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/"/>
-    <id>http://example.com/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/</id>
+    <link href="https://weichunxiu123.github.io/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/"/>
+    <id>https://weichunxiu123.github.io/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/</id>
     <published>2023-06-08T03:05:04.000Z</published>
     <updated>2023-06-08T03:30:29.005Z</updated>
     
@@ -38,8 +38,8 @@
   
   <entry>
     <title>spark-YARN模式部署</title>
-    <link href="http://example.com/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://weichunxiu123.github.io/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/"/>
+    <id>https://weichunxiu123.github.io/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/</id>
     <published>2023-06-08T02:48:27.000Z</published>
     <updated>2023-06-08T02:56:31.947Z</updated>
     
@@ -58,8 +58,8 @@
   
   <entry>
     <title>spark-HA环境部署</title>
-    <link href="http://example.com/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
+    <id>https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</id>
     <published>2023-06-08T02:34:22.000Z</published>
     <updated>2023-06-08T02:47:22.757Z</updated>
     
@@ -78,8 +78,8 @@
   
   <entry>
     <title>Spark-standalone环境部署</title>
-    <link href="http://example.com/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://weichunxiu123.github.io/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
+    <id>https://weichunxiu123.github.io/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</id>
     <published>2023-06-08T01:56:46.000Z</published>
     <updated>2023-06-08T02:23:25.606Z</updated>
     
@@ -98,8 +98,8 @@
   
   <entry>
     <title>Spark--local模式配置</title>
-    <link href="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/"/>
-    <id>http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/</id>
+    <link href="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/"/>
+    <id>https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/</id>
     <published>2023-06-07T11:38:25.000Z</published>
     <updated>2023-06-08T03:39:09.806Z</updated>
     
@@ -118,8 +118,8 @@
   
   <entry>
     <title>Docker安装与基本操作</title>
-    <link href="http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
-    <id>http://example.com/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</id>
+    <link href="https://weichunxiu123.github.io/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <id>https://weichunxiu123.github.io/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</id>
     <published>2023-06-07T10:25:11.000Z</published>
     <updated>2023-06-07T12:13:23.159Z</updated>
     
@@ -139,8 +139,8 @@
   
   <entry>
     <title>Git安装与配置</title>
-    <link href="http://example.com/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/"/>
-    <id>http://example.com/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</id>
+    <link href="https://weichunxiu123.github.io/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/"/>
+    <id>https://weichunxiu123.github.io/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</id>
     <published>2023-06-07T09:39:32.000Z</published>
     <updated>2023-06-07T10:15:48.449Z</updated>
     
@@ -161,8 +161,8 @@
   
   <entry>
     <title>hive安装</title>
-    <link href="http://example.com/wiki/hive%E5%AE%89%E8%A3%85/"/>
-    <id>http://example.com/wiki/hive%E5%AE%89%E8%A3%85/</id>
+    <link href="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/"/>
+    <id>https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/</id>
     <published>2023-06-07T08:56:02.000Z</published>
     <updated>2023-06-07T09:34:32.007Z</updated>
     
@@ -181,8 +181,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://example.com/wiki/hello-world/"/>
-    <id>http://example.com/wiki/hello-world/</id>
+    <link href="https://weichunxiu123.github.io/wiki/hello-world/"/>
+    <id>https://weichunxiu123.github.io/wiki/hello-world/</id>
     <published>2023-06-07T00:16:18.933Z</published>
     <updated>2023-06-07T00:16:18.933Z</updated>
     

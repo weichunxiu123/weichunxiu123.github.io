@@ -12,32 +12,32 @@
     <meta name="description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n pyspark python&#x3D;3.8conda activate pysparkpip install pyhive pyspark jieba">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark--local模式配置">
-<meta property="og:url" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:url" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n pyspark python&#x3D;3.8conda activate pysparkpip install pyhive pyspark jieba">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps111.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps113.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps115.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps114.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps116.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps117.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps118.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps119.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps120.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps121.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps122.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps123.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/image-20230607195152782.png">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps126.jpg">
-<meta property="og:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps128.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps111.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps113.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps115.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps114.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps116.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps117.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps118.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps119.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps120.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps121.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps122.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps123.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/image-20230607195152782.png">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps126.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps128.jpg">
 <meta property="article:published_time" content="2023-06-07T11:38:25.000Z">
 <meta property="article:modified_time" content="2023-06-08T03:39:09.806Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
+<meta name="twitter:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
     
 
     
