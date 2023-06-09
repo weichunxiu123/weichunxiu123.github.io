@@ -9,12 +9,12 @@
         <meta name="keywords" content="搭建,spark">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Spark（pyspark基础编码环境）（一）、pyspark环境配置安装。 PySpark是Spark官方提供的一个Python类库，内置了Spark API，可以通过PySpark类库来编写Spark程序，并提交到Spark集群中运行。 1234前情提示：（1）将课程资料中提供的的hadoop-3.3.0文件，复制到某个盘符下（中文的且无空格的）。（2）将文件夹内bin内的Hadoop.dll">
+    <meta name="description" content="Spark（pyspark基础编码环境）（一）、pyspark环境配置安装。 PySpark是Spark官方提供的一个Python类库，内置了Spark API，可以通过PySpark类库来编写Spark程序，并提交到Spark集群中运行。 前情提示： （1）将课程资料中提供的的hadoop-3.3.0文件，复制到某个盘符下（中文的且无空格的）。 （2）将文件夹内bin内的Hadoop.dll复制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark-pyspark基础编码环境">
 <meta property="og:url" content="https://weichunxiu123.github.io/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="weichunxiu123--spark搭建">
-<meta property="og:description" content="Spark（pyspark基础编码环境）（一）、pyspark环境配置安装。 PySpark是Spark官方提供的一个Python类库，内置了Spark API，可以通过PySpark类库来编写Spark程序，并提交到Spark集群中运行。 1234前情提示：（1）将课程资料中提供的的hadoop-3.3.0文件，复制到某个盘符下（中文的且无空格的）。（2）将文件夹内bin内的Hadoop.dll">
+<meta property="og:description" content="Spark（pyspark基础编码环境）（一）、pyspark环境配置安装。 PySpark是Spark官方提供的一个Python类库，内置了Spark API，可以通过PySpark类库来编写Spark程序，并提交到Spark集群中运行。 前情提示： （1）将课程资料中提供的的hadoop-3.3.0文件，复制到某个盘符下（中文的且无空格的）。 （2）将文件夹内bin内的Hadoop.dll复制">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps46.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps47.jpg">
@@ -416,7 +416,10 @@
         
             <h2 id="Spark（pyspark基础编码环境）"><a href="#Spark（pyspark基础编码环境）" class="headerlink" title="Spark（pyspark基础编码环境）"></a><strong>Spark（pyspark基础编码环境）</strong></h2><p>（一）、pyspark环境配置安装。</p>
 <p>PySpark是Spark官方提供的一个Python类库，内置了Spark API，可以通过PySpark类库来编写Spark程序，并提交到Spark集群中运行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">前情提示：</span><br><span class="line">（1）将课程资料中提供的的hadoop-3.3.0文件，复制到某个盘符下（中文的且无空格的）。</span><br><span class="line">（2）将文件夹内bin内的Hadoop.dll复制到C:\Windows\Systmctl32里面去。</span><br><span class="line">（3）在系统环境变量中配置HADOOP_HOME，指向hadoop-3.3.0文件夹的路径。</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">前情提示：
+（1）将课程资料中提供的的hadoop-3.3.0文件，复制到某个盘符下（中文的且无空格的）。
+（2）将文件夹内bin内的Hadoop.dll复制到C:\Windows\Systmctl32里面去。
+（3）在系统环境变量中配置HADOOP_HOME，指向hadoop-3.3.0文件夹的路径。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps46.jpg" alt="img" style="zoom:110%;">
 
@@ -445,22 +448,32 @@
 
 <p>（4）配置国内源，加速网络下载。</p>
 <p>1、在Anaconda Prompt(anaconda)中执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">conda config --set show_channel_urls yes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>2、将如下内容替换到C:\Users\用户名.condarc文件中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">channels: \- defaultsshow_channel_urls: truedefault_channels:</span><br><span class="line"> \- https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line"> \- https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line"> \- https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line"> conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">channels: \- defaultsshow_channel_urls: truedefault_channels:
+ \- https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main
+ \- https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;r
+ \- https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;msys2
+custom_channels:
+ conda-forge: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud
+ msys2: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud
+ bioconda: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud
+ menpo: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud
+ pytorch: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud
+ simpleitk: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
 <p>（5）创建虚拟环境</p>
 <p>1、创建虚拟环境 pyspark, 基于Python 3.8</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pyspark python=3.8</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">conda create -n pyspark python&#x3D;3.8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>2、切换到虚拟环境内</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate pyspark</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">conda activate pyspark<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>3、在虚拟环境内安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyhive pyspark jieba -i [https://pypi.tuna.tsinghua.edu.cn/](https://pypi.tuna.tsinghua.edu.cn/simple)simple</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">pip install pyhive pyspark jieba -i [https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;](https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple)simple<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装成功示例：</p>
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps53.jpg" alt="img" style="zoom:110%;"> 
@@ -490,7 +503,29 @@
 <p>可以选择在本地的PySpark环境中执行spark代码，也可以选择在虚拟机环境PySpark中执行。选择本地的就是使用conda环境，应用其中的PySpark环境执行，来读取本地文件，完成单词计数的实例。选择远程虚拟机中的PySpark环境，需要SSH连接到服务器（这里需要安装Pycharm专业版），注意：无论是选择那种方案，都是在PyCharm软件中去执行，完成上述过程。</p>
 <p>（1）WordCount代码本地执行</p>
 <p>准备pyspark代码以及本地文件words.txt，在PyCharm中执行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf8</span><br><span class="line">from pyspark import SparkConf, SparkContext\# import os</span><br><span class="line">import os</span><br><span class="line">os.environ[&#x27;PYSPARK_PYTHON&#x27;]=&#x27;D:\\anaconda3\\envs\\pyspark\\python.exe&#x27;</span><br><span class="line">os.environ [&#x27;JAVA_HOME&#x27;] = &#x27;D:\\Java\\jdk1.8.0_241&#x27;</span><br><span class="line">\#os.environ[&#x27;PYSPARK_PYTHON&#x27;]=&#x27;/export/server/anaconda3/envs/pyspark/bin/python3.8&#x27;</span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">  conf = SparkConf().setAppName(&quot;WordCountHelloWorld&quot;).setMaster(&quot;local[*]&quot;)</span><br><span class="line">  # 通过SparkConf对象构建SparkContext对象</span><br><span class="line">  sc = SparkContext(conf=conf)</span><br><span class="line">  # 需求 : wordcount单词计数, 读取HDFS上的words.txt文件, 对其内部的单词统计出现 的数量</span><br><span class="line">  # 读取文件</span><br><span class="line">  #file_rdd = sc.textFile(&quot;hdfs://node1:8020/input/words.txt&quot;)</span><br><span class="line">  #file_rdd = sc.textFile(&quot;file:///tmp/pycharm_project_621/data/words.txt&quot;)</span><br><span class="line">  file_rdd = sc.textFile(&quot;D:\\数据挖掘与分析实验报告合集\\pyspark\\data\\input\\words.txt&quot;)</span><br><span class="line">  # 将单词进行切割, 得到一个存储全部单词的集合对象</span><br><span class="line">  words_rdd = file_rdd.flatMap(lambda line: line.split(&quot; &quot;))</span><br><span class="line">  # 将单词转换为元组对象, key是单词, value是数字1</span><br><span class="line">  words_with_one_rdd = words_rdd.map(lambda x: (x, 1))</span><br><span class="line">  # 将元组的value 按照key来分组, 对所有的value执行聚合操作(相加)</span><br><span class="line">  result_rdd = words_with_one_rdd.reduceByKey(lambda a, b: a + b)</span><br><span class="line">  # 通过collect方法收集RDD的数据打印输出结果</span><br><span class="line">print(result_rdd.collect())</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># coding:utf8
+from pyspark import SparkConf, SparkContext\# import os
+import os
+os.environ[&#39;PYSPARK_PYTHON&#39;]&#x3D;&#39;D:\\anaconda3\\envs\\pyspark\\python.exe&#39;
+os.environ [&#39;JAVA_HOME&#39;] &#x3D; &#39;D:\\Java\\jdk1.8.0_241&#39;
+\#os.environ[&#39;PYSPARK_PYTHON&#39;]&#x3D;&#39;&#x2F;export&#x2F;server&#x2F;anaconda3&#x2F;envs&#x2F;pyspark&#x2F;bin&#x2F;python3.8&#39;
+if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
+  conf &#x3D; SparkConf().setAppName(&quot;WordCountHelloWorld&quot;).setMaster(&quot;local[*]&quot;)
+  # 通过SparkConf对象构建SparkContext对象
+  sc &#x3D; SparkContext(conf&#x3D;conf)
+  # 需求 : wordcount单词计数, 读取HDFS上的words.txt文件, 对其内部的单词统计出现 的数量
+  # 读取文件
+  #file_rdd &#x3D; sc.textFile(&quot;hdfs:&#x2F;&#x2F;node1:8020&#x2F;input&#x2F;words.txt&quot;)
+  #file_rdd &#x3D; sc.textFile(&quot;file:&#x2F;&#x2F;&#x2F;tmp&#x2F;pycharm_project_621&#x2F;data&#x2F;words.txt&quot;)
+  file_rdd &#x3D; sc.textFile(&quot;D:\\数据挖掘与分析实验报告合集\\pyspark\\data\\input\\words.txt&quot;)
+  # 将单词进行切割, 得到一个存储全部单词的集合对象
+  words_rdd &#x3D; file_rdd.flatMap(lambda line: line.split(&quot; &quot;))
+  # 将单词转换为元组对象, key是单词, value是数字1
+  words_with_one_rdd &#x3D; words_rdd.map(lambda x: (x, 1))
+  # 将元组的value 按照key来分组, 对所有的value执行聚合操作(相加)
+  result_rdd &#x3D; words_with_one_rdd.reduceByKey(lambda a, b: a + b)
+  # 通过collect方法收集RDD的数据打印输出结果
+print(result_rdd.collect())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行结果截图：</p>
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps59.jpg" alt="img" style="zoom:110%;"> 
@@ -503,7 +538,7 @@
 
  
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">完成与服务器连接后，会在服务器中的/tmp文件夹下新建了pycharm_project_xxx文件夹用于放置本地的同步代码。</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">完成与服务器连接后，会在服务器中的&#x2F;tmp文件夹下新建了pycharm_project_xxx文件夹用于放置本地的同步代码。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps62.jpg" alt="img" style="zoom:110%;"> 
 
@@ -514,10 +549,10 @@
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps63.jpg" alt="img" style="zoom:110%;">  
 
 <p>2、在hdfs上新建&#x2F;input文件夹，使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir /input</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">hadoop fs -mkdir &#x2F;input<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>3、上传words.txt到hdfs中，使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -put words.txt /input/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">hadoop fs -put words.txt &#x2F;input&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps64.jpg" alt="img" style="zoom:100%;"> 
 
@@ -529,7 +564,7 @@
 <p>（五）spark-submit作业提交</p>
 <p>（1）local本地模式</p>
 <p>首先将helloword.py程序放到&#x2F;root&#x2F;目录下，使用命令完成提交作业。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master local[*] /root/helloworld.py</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;spark-submit --master local[*] &#x2F;root&#x2F;helloworld.py<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps66.jpg" alt="img" style="zoom:110%;"> 
 
@@ -537,14 +572,14 @@
 
 <p>（2）spark on yarn模式</p>
 <p>使用命令完成提交作业。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master yarn /root/helloworld.py</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;spark-submit --master yarn &#x2F;root&#x2F;helloworld.py<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps67.jpg" alt="img" style="zoom:110%;"> 
 
  
 
 <p>（3）使用历史服务器查看任务执行情况 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node1:18080</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">node1:18080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/wps68.jpg" alt="img" style="zoom:110%;"> 
 

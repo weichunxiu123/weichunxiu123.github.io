@@ -9,12 +9,12 @@
         <meta name="keywords" content="搭建,spark">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="spark（YARN模式）（1）Client模式中driver运行在客户端，在客户端显示输出结果，但是在spark历史服务器不显示logs信息。 （2）Cluster模式中driver运行在YARN容器内部，和ApplicationMaster在同一个容器内，在客户端不显示输出结果，所以在spark历史服务器中显示logs的信息。    （3）client模式测试 1bin&#x2F;spark-submi">
+    <meta name="description" content="spark（YARN模式）（1）Client模式中driver运行在客户端，在客户端显示输出结果，但是在spark历史服务器不显示logs信息。 （2）Cluster模式中driver运行在YARN容器内部，和ApplicationMaster在同一个容器内，在客户端不显示输出结果，所以在spark历史服务器中显示logs的信息。    （3）client模式测试 bin&#x2F;spark-s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark-YARN模式部署">
 <meta property="og:url" content="https://weichunxiu123.github.io/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="weichunxiu123--spark搭建">
-<meta property="og:description" content="spark（YARN模式）（1）Client模式中driver运行在客户端，在客户端显示输出结果，但是在spark历史服务器不显示logs信息。 （2）Cluster模式中driver运行在YARN容器内部，和ApplicationMaster在同一个容器内，在客户端不显示输出结果，所以在spark历史服务器中显示logs的信息。    （3）client模式测试 1bin&#x2F;spark-submi">
+<meta property="og:description" content="spark（YARN模式）（1）Client模式中driver运行在客户端，在客户端显示输出结果，但是在spark历史服务器不显示logs信息。 （2）Cluster模式中driver运行在YARN容器内部，和ApplicationMaster在同一个容器内，在客户端不显示输出结果，所以在spark历史服务器中显示logs的信息。    （3）client模式测试 bin&#x2F;spark-s">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/wps43.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/wps44.jpg">
@@ -398,16 +398,17 @@
 <img src="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/wps43.jpg" alt="img" style="zoom:110%;"> 
 
 <p>（3）client模式测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master yarn --deploy-mode client --driver-memory 512m $&#123;SPARK_HOME&#125;/examples/src/main/python/pi.py 10</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;spark-submit --master yarn --deploy-mode client --driver-memory 512m $&#123;SPARK_HOME&#125;&#x2F;examples&#x2F;src&#x2F;main&#x2F;python&#x2F;pi.py 10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/wps44.jpg" alt="img" style="zoom:110%;"> 
 
  
 
 <p>（4） cluster模式测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master yarn --deploy-mode cluster --driver-memory 512m \--conf &quot;spark.pyspark.driver.python=/export/server/anaconda3</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;spark-submit --master yarn --deploy-mode cluster --driver-memory 512m \--conf &quot;spark.pyspark.driver.python&#x3D;&#x2F;export&#x2F;server&#x2F;anaconda3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/bin/python3&quot; \--conf &quot;spark.pyspark.python=/export/server/anaconda3</span><br><span class="line">/bin/python3&quot; $&#123;SPARK_HOME&#125;/examples/src/main/python/pi.py 10</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;bin&#x2F;python3&quot; \--conf &quot;spark.pyspark.python&#x3D;&#x2F;export&#x2F;server&#x2F;anaconda3
+&#x2F;bin&#x2F;python3&quot; $&#123;SPARK_HOME&#125;&#x2F;examples&#x2F;src&#x2F;main&#x2F;python&#x2F;pi.py 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/wps45.jpg" alt="img" style="zoom:110%;">
 

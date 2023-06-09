@@ -9,12 +9,12 @@
         <meta name="keywords" content="搭建,spark">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n pyspark python&#x3D;3.8conda activate pysparkpip install pyhive pyspark jieba">
+    <meta name="description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 conda create -n pyspark python&#x3D;3.8  conda activate pyspark  pip install pyhive pyspar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark-local模式配置">
 <meta property="og:url" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="weichunxiu123--spark搭建">
-<meta property="og:description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  1sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 12345conda create -n pyspark python&#x3D;3.8conda activate pysparkpip install pyhive pyspark jieba">
+<meta property="og:description" content="spark（local环境部署）（1）安装Anaconda 上传安装包  sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh     出现（base)即为安装成功 （2）创建虚拟环境 conda create -n pyspark python&#x3D;3.8  conda activate pyspark  pip install pyhive pyspar">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg">
@@ -409,13 +409,17 @@
         
             <h2 id="spark（local环境部署）"><a href="#spark（local环境部署）" class="headerlink" title="spark（local环境部署）"></a><strong>spark（local<strong><strong>环境部署</strong></strong>）</strong></h2><p>（1）安装Anaconda</p>
 <p>上传安装包 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg" alt="img" style="zoom:110%;"> 
 
 <p><img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps110.jpg" alt="img" style="zoom:110%;">出现（base)即为安装成功</p>
 <p>（2）创建虚拟环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pyspark python=3.8</span><br><span class="line"></span><br><span class="line">conda activate pyspark</span><br><span class="line"></span><br><span class="line">pip install pyhive pyspark jieba -i [https://pypi.tuna.tsinghua.edu.cn](https://pypi.tuna.tsinghua.edu.cn/simple)/simple</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">conda create -n pyspark python&#x3D;3.8
+
+conda activate pyspark
+
+pip install pyhive pyspark jieba -i [https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn](https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple)&#x2F;simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>（1）修改环境变量配置Spark由如下5个环境变量需要设置</p>
 <p>SPARK_HOME: 表示Spark安装路径在哪里 </p>
@@ -428,15 +432,15 @@
 
 <p>（4）解压</p>
 <p>解压下载的Spark安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf spark-3.2.0-bin-hadoop3.2.tgz -C /export/server/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">tar -zxvf spark-3.2.0-bin-hadoop3.2.tgz -C &#x2F;export&#x2F;server&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps113.jpg" alt="img" style="zoom:110%;">
 
 <p>设置软连接</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /export/server/spark-3.2.0-bin-hadoop3.2 /export/server/spark</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">ln -s &#x2F;export&#x2F;server&#x2F;spark-3.2.0-bin-hadoop3.2 &#x2F;export&#x2F;server&#x2F;spark<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>（2）测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.parallelize([1,2,3,4,5]).map(lambda x: x + 1).collect()</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">sc.parallelize([1,2,3,4,5]).map(lambda x: x + 1).collect()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>bin&#x2F;pyspark在这个环境可以运行spark代码，如图：</p>
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps115.jpg" alt="img" style="zoom:110%;">
@@ -456,67 +460,78 @@
 <p>进入到spark的配置文件目录中, cd $SPARK_HOME&#x2F;conf&#96;</p>
 <p>配置workers文件vi workers</p>
 <p># 改名, 去掉后面的.template后缀</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv workers.template workers</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">mv workers.template workers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># 编辑worker文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim workers</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">vim workers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># 将里面的localhost删除, 追加到workers文件内</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node1</span><br><span class="line">node2</span><br><span class="line">node3</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">node1
+node2
+node3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>（4）配置spark-env.sh文件</p>
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps118.jpg" alt="img" style="zoom:100%;">
 
 <p># 1. 改名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv spark-env.sh.template spark-env.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">mv spark-env.sh.template spark-env.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># 2. 编辑spark-env.sh, 在底部追加如下内容</p>
 <p>## 设置JAVA安装目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/export/server/jdk</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">JAVA_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;jdk<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>## HADOOP软件配置文件目录，读取HDFS上文件和运行YARN集群</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HADOOP_CONF_DIR=/export/server/hadoop/etc/hadoop</span><br><span class="line"></span><br><span class="line">YARN_CONF_DIR=/export/server/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">HADOOP_CONF_DIR&#x3D;&#x2F;export&#x2F;server&#x2F;hadoop&#x2F;etc&#x2F;hadoop
+
+YARN_CONF_DIR&#x3D;&#x2F;export&#x2F;server&#x2F;hadoop&#x2F;etc&#x2F;hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>## 指定spark老大Master的IP和提交任务的通信端口</p>
 <p># 告知Spark的master运行在哪个机器上</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_MASTER_HOST=node1</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">export SPARK_MASTER_HOST&#x3D;node1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># 告知sparkmaster的通讯端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_MASTER_PORT=7077</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">export SPARK_MASTER_PORT&#x3D;7077<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># 告知spark master的 webui端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_MASTER_WEBUI_PORT=8080</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">SPARK_MASTER_WEBUI_PORT&#x3D;8080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># worker cpu可用核数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_WORKER_CORES=1</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">SPARK_WORKER_CORES&#x3D;1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># worker可用内存</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_WORKER_MEMORY=1g</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">SPARK_WORKER_MEMORY&#x3D;1g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># worker的工作通讯地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_WORKER_PORT=7078</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">SPARK_WORKER_PORT&#x3D;7078<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># worker的 webui地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_WORKER_WEBUI_PORT=8081</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">SPARK_WORKER_WEBUI_PORT&#x3D;8081<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>## 设置历史服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 配置的意思是  将spark程序运行的历史日志 存到hdfs的/sparklog文件夹中</span><br><span class="line">SPARK_HISTORY_OPTS=&quot;-Dspark.history.fs.logDirectory=hdfs://node1:8020/sparklog/ -Dspark.history.fs.cleaner.enabled=true&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># 配置的意思是  将spark程序运行的历史日志 存到hdfs的&#x2F;sparklog文件夹中
+SPARK_HISTORY_OPTS&#x3D;&quot;-Dspark.history.fs.logDirectory&#x3D;hdfs:&#x2F;&#x2F;node1:8020&#x2F;sparklog&#x2F; -Dspark.history.fs.cleaner.enabled&#x3D;true&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps119.jpg" alt="img" style="zoom:100%;">
 
 <p>在HDFS上创建程序运行历史记录存放的文件夹:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir /sparklog</span><br><span class="line">hadoop fs -chmod 777 /sparklog</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">hadoop fs -mkdir &#x2F;sparklog
+hadoop fs -chmod 777 &#x2F;sparklog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps120.jpg" alt="img" style="zoom:100%;">
 
 <p>（3）配置spark-defaults.conf文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 1. 改名</span><br><span class="line">mv spark-defaults.conf.template spark-defaults.conf</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># 1. 改名
+mv spark-defaults.conf.template spark-defaults.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 2. 修改内容, 追加如下内容</span><br><span class="line"># 开启spark的日期记录功能</span><br><span class="line">spark.eventLog.enabled 	true</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># 2. 修改内容, 追加如下内容
+# 开启spark的日期记录功能
+spark.eventLog.enabled 	true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 设置spark日志记录的路径</span><br><span class="line">spark.eventLog.dir	 hdfs://node1:8020/sparklog/ </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># 设置spark日志记录的路径
+spark.eventLog.dir	 hdfs:&#x2F;&#x2F;node1:8020&#x2F;sparklog&#x2F; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 设置spark日志是否启动压缩</span><br><span class="line">spark.eventLog.compress 	true</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"># 设置spark日志是否启动压缩
+spark.eventLog.compress 	true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps121.jpg" alt="img" style="zoom:100%;">
 
@@ -524,17 +539,28 @@
 <p>mv log4j.properties.template log4j.properties 注意：将Spark安装文件夹  分发到其它的服务器</p>
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps122.jpg" alt="img" style="zoom:100%;">
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1）scp -r spark-3.1.2-bin-hadoop3.2 node2:/export/server/</span><br><span class="line"></span><br><span class="line">2）scp -r spark-3.1.2-bin-hadoop3.2 node3:/export/server/</span><br><span class="line"></span><br><span class="line">3）在node2和node3上 给spark安装目录增加软链接</span><br><span class="line"></span><br><span class="line">ln -s /export/server/spark-3.2.0-bin-hadoop3.2 /export/server/spark</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">1）scp -r spark-3.1.2-bin-hadoop3.2 node2:&#x2F;export&#x2F;server&#x2F;
+
+2）scp -r spark-3.1.2-bin-hadoop3.2 node3:&#x2F;export&#x2F;server&#x2F;
+
+3）在node2和node3上 给spark安装目录增加软链接
+
+ln -s &#x2F;export&#x2F;server&#x2F;spark-3.2.0-bin-hadoop3.2 &#x2F;export&#x2F;server&#x2F;spark<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps123.jpg" alt="img" style="zoom:100%;"> 
 
 <p>（5）启动历史服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-history-server.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">sbin&#x2F;start-history-server.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
  <img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/image-20230607195152782.png" alt="image-20230607195152782" style="zoom:100%;">
 
 <p>（6）启动Spark的Master和Worker进程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-all.sh</span><br><span class="line">sbin/start-master.sh</span><br><span class="line">sbin/start-worker.sh</span><br><span class="line">sbin/stop-all.sh</span><br><span class="line">sbin/stop-master.sh</span><br><span class="line">sbin/stop-worker.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">sbin&#x2F;start-all.sh
+sbin&#x2F;start-master.sh
+sbin&#x2F;start-worker.sh
+sbin&#x2F;stop-all.sh
+sbin&#x2F;stop-master.sh
+sbin&#x2F;stop-worker.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/wps126.jpg" alt="img"> </p>
 <p>查看Master的WEB UI</p>

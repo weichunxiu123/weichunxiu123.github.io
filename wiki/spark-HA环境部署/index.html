@@ -9,12 +9,12 @@
         <meta name="keywords" content="搭建,spark">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="spark（HA环境部署）（1）首先进入spark-env.sh中， 1vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh     （2）在spark-env.sh配置文件中删除 1export SPARK_MASTER_HOST&#x3D;node1  （目的是不让机器知道固定的master是谁，不然无法进行master切换）      （3）在spark-env.sh配">
+    <meta name="description" content="spark（HA环境部署）（1）首先进入spark-env.sh中， vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh     （2）在spark-env.sh配置文件中删除 export SPARK_MASTER_HOST&#x3D;node1  （目的是不让机器知道固定的master是谁，不然无法进行mast">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark-HA环境部署">
 <meta property="og:url" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="weichunxiu123--spark搭建">
-<meta property="og:description" content="spark（HA环境部署）（1）首先进入spark-env.sh中， 1vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh     （2）在spark-env.sh配置文件中删除 1export SPARK_MASTER_HOST&#x3D;node1  （目的是不让机器知道固定的master是谁，不然无法进行master切换）      （3）在spark-env.sh配">
+<meta property="og:description" content="spark（HA环境部署）（1）首先进入spark-env.sh中， vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh     （2）在spark-env.sh配置文件中删除 export SPARK_MASTER_HOST&#x3D;node1  （目的是不让机器知道固定的master是谁，不然无法进行mast">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps33.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps34.jpg">
@@ -401,12 +401,12 @@
         
         
             <h2 id="spark（HA环境部署）"><a href="#spark（HA环境部署）" class="headerlink" title="spark（HA环境部署）"></a><strong>spark（HA环境部署）</strong></h2><p>（1）首先进入spark-env.sh中，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /export/server/spark/conf/spark-env.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps33.jpg" alt="img" style="zoom:100%;"> 
 
 <p>（2）在spark-env.sh配置文件中删除</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_MASTER_HOST=node1</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">export SPARK_MASTER_HOST&#x3D;node1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>（目的是不让机器知道固定的master是谁，不然无法进行master切换）</p>
 <img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps34.jpg" alt="img" style="zoom:110%;"> 
@@ -414,7 +414,7 @@
 
 
 <p>（3）在spark-env.sh配置文件中增加以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_DAEMON_JAVA_OPTS=&quot;-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=node1:2181,node2:2181,node3:2181 -Dspark.deploy.zookeeper.dir=/spark-ha&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">SPARK_DAEMON_JAVA_OPTS&#x3D;&quot;-Dspark.deploy.recoveryMode&#x3D;ZOOKEEPER -Dspark.deploy.zookeeper.url&#x3D;node1:2181,node2:2181,node3:2181 -Dspark.deploy.zookeeper.dir&#x3D;&#x2F;spark-ha&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p># spark.deploy.recoveryMode 指定HA模式 基于Zookeeper实现</p>
 <p># 指定Zookeeper的连接地址</p>
@@ -424,7 +424,8 @@
  
 
 <p>（4）将spark-env.sh配置文件分发给node2、node3。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /export/server/spark/conf/spark-env.sh node2:/export/server/spark/conf/</span><br><span class="line">scp -r /export/server/spark/conf/spark-env.sh node3:/export/server/spark/conf/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">scp -r &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh node2:&#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;
+scp -r &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh node3:&#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps36.jpg" alt="img" style="zoom:110%;"> 
 
@@ -432,24 +433,25 @@
 
 <p>（5）启动StandAlone集群、zookeeper集群：</p>
 <p>1）在node1上：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-all.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">sbin&#x2F;start-all.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps37.jpg" alt="img"> </p>
 <p>2）在node2上：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-master.sh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">sbin&#x2F;start-master.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>（目的是：备用master，当kill掉node1的master后，程序依然能进行）</p>
 <p><img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps38.jpg" alt="img"> </p>
 <p>（6）查看node1、node2的WEB UI</p>
 <p>（如果8080端口被占用了，可以顺延到8081、8082端口，其中node1上的master是alive的，node2上的是standby） </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node1:8080--&gt;8081   </span><br><span class="line">node2:8080--&gt;8081\8082</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">node1:8080--&gt;8081   
+node2:8080--&gt;8081\8082<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps39.jpg" alt="img" style="zoom:100%;"> 
 
 <img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps40.jpg" alt="img" style="zoom:100%;"> 
 
 <p>（6）Master主备切换，在&#x2F;export&#x2F;server&#x2F;spark路径下提交一个任务到当前alive master上:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master spark://node1:7077 /export/server/spark/examples/src/main/python/pi.py 1000</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;spark-submit --master spark:&#x2F;&#x2F;node1:7077 &#x2F;export&#x2F;server&#x2F;spark&#x2F;examples&#x2F;src&#x2F;main&#x2F;python&#x2F;pi.py 1000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>（在提交成功后, 将alive master直接kill掉，系统不会中断，仍然能正常运行结果）</p>
 <img src="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps41.jpg" alt="img" style="zoom:100%;"> 
