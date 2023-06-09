@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     
-    <title>spark-HA环境部署 | Hexo</title>
+    <title>Spark-HA环境部署 | Hexo</title>
     
     
-        <meta name="keywords" content="spark-HA环境部署">
+        <meta name="keywords" content="搭建,spark">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="spark（HA环境部署）（1）首先进入spark-env.sh中， 1vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh     （2）在spark-env.sh配置文件中删除 1export SPARK_MASTER_HOST&#x3D;node1  （目的是不让机器知道固定的master是谁，不然无法进行master切换）      （3）在spark-env.sh配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark-HA环境部署">
+<meta property="og:title" content="Spark-HA环境部署">
 <meta property="og:url" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="spark（HA环境部署）（1）首先进入spark-env.sh中， 1vim &#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;spark-env.sh     （2）在spark-env.sh配置文件中删除 1export SPARK_MASTER_HOST&#x3D;node1  （目的是不让机器知道固定的master是谁，不然无法进行master切换）      （3）在spark-env.sh配">
@@ -26,9 +26,11 @@
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps40.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps41.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps42.jpg">
-<meta property="article:published_time" content="2023-06-08T02:34:22.000Z">
-<meta property="article:modified_time" content="2023-06-08T02:47:22.757Z">
+<meta property="article:published_time" content="2023-06-08T02:34:22.238Z">
+<meta property="article:modified_time" content="2023-06-09T00:27:10.084Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="搭建">
+<meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://weichunxiu123.github.io/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/wps33.jpg">
     
@@ -189,15 +191,15 @@
         
         
          <ul class="unstyled" id="tree"> 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             工具
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/hive%E5%AE%89%E8%A3%85/">Hive基础配置</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/hive%E5%AE%89%E8%A3%85/">Hive基础配置</a></li>  <li class="file"><a href="/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Git安装与配置</a></li>  <li class="file"><a href="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">Spark-local模式配置</a></li>  <li class="file"><a href="/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-standalone环境部署</a></li>  <li class="file active"><a href="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-HA环境部署</a></li>  <li class="file"><a href="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">Spark-YARN模式部署</a></li>  <li class="file"><a href="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/">Spark-pyspark基础编码环境</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Git安装与配置</a></li>  <li class="file"><a href="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">Docker安装与基本操作</a></li>  <li class="file"><a href="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">Spark--local模式配置</a></li>  <li class="file"><a href="/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-standalone环境部署</a></li>  <li class="file active"><a href="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">spark-HA环境部署</a></li>  <li class="file"><a href="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">spark-YARN模式部署</a></li>  <li class="file"><a href="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/">Spark-pyspark基础编码环境</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">Docker安装与基本操作</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -276,12 +278,22 @@
                 
                     <div class="article-meta">
                         
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/spark/" rel="tag">spark</a>, <a class="tag-link-link" href="/tags/%E6%90%AD%E5%BB%BA/" rel="tag">搭建</a>
+    </div>
+
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
-            <time datetime="2023-06-08T02:34:22.000Z" itemprop="datePublished">2023-06-08</time>
+            <time datetime="2023-06-08T02:34:22.238Z" itemprop="datePublished">2023-06-08</time>
         </a>
     </div>
 
@@ -306,7 +318,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            spark-HA环境部署
+            Spark-HA环境部署
         </h1>
     
 
@@ -316,11 +328,6 @@
         <div class="article-entry" itemprop="articleBody">
         
         
-            
-                <div id="toc" class="toc-article">
-                <strong class="toc-title">Catalogue</strong>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#spark%EF%BC%88HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">spark（HA环境部署）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li></ol>
-                </div>
             
         
         
@@ -405,7 +412,7 @@
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    spark-YARN模式部署
+                    Spark-YARN模式部署
                 
             </div>
         </a>
