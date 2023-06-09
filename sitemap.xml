@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://weichunxiu123.github.io/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</loc>
+    
+    <lastmod>2023-06-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://weichunxiu123.github.io/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/</loc>
     
     <lastmod>2023-06-09</lastmod>
@@ -74,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://weichunxiu123.github.io/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</loc>
+    <loc>https://weichunxiu123.github.io/categories/index.html</loc>
     
     <lastmod>2023-06-07</lastmod>
     
@@ -100,15 +109,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://weichunxiu123.github.io/categories/index.html</loc>
-    
-    <lastmod>2023-06-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://weichunxiu123.github.io/</loc>
@@ -127,6 +127,20 @@
   
   <url>
     <loc>https://weichunxiu123.github.io/tags/spark/</loc>
+    <lastmod>2023-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://weichunxiu123.github.io/tags/%E5%88%9D%E8%AF%86/</loc>
+    <lastmod>2023-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://weichunxiu123.github.io/tags/hexo/</loc>
     <lastmod>2023-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
