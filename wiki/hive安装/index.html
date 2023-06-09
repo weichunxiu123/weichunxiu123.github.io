@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Hexo</title>
+    <title>Hive基础配置 | Hexo</title>
     
     
-        <meta name="keywords" content="Hexo">
+        <meta name="keywords" content="搭建,spark">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="​—title:hive安装toc:truedate:2023-06-07 16:56:02tags:搭建sparkcategories:工具​—一、Hive安装*（1）**Mysql安装* 1）卸载Centos7自带的mariadb   如果出现了mariadb-libs-5.5.64-1.el7.x86_64，输入rpm -e mariadb- libs-5.5.64-1.el7.x86_6">
+    <meta name="description" content="一、Hive安装*（1）**Mysql安装* 1）卸载Centos7自带的mariadb   如果出现了mariadb-libs-5.5.64-1.el7.x86_64，输入rpm -e mariadb- libs-5.5.64-1.el7.x86_64 –nodeps,在输入rpm -qa|grep mariadb，即可 2）安装mysql 新建文件夹 1mkdir &#x2F;export&#x2F;server">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Hive基础配置">
 <meta property="og:url" content="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="​—title:hive安装toc:truedate:2023-06-07 16:56:02tags:搭建sparkcategories:工具​—一、Hive安装*（1）**Mysql安装* 1）卸载Centos7自带的mariadb   如果出现了mariadb-libs-5.5.64-1.el7.x86_64，输入rpm -e mariadb- libs-5.5.64-1.el7.x86_6">
+<meta property="og:description" content="一、Hive安装*（1）**Mysql安装* 1）卸载Centos7自带的mariadb   如果出现了mariadb-libs-5.5.64-1.el7.x86_64，输入rpm -e mariadb- libs-5.5.64-1.el7.x86_64 –nodeps,在输入rpm -qa|grep mariadb，即可 2）安装mysql 新建文件夹 1mkdir &#x2F;export&#x2F;server">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/wps1.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/wps2.jpg">
@@ -37,8 +37,10 @@
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/wps19.jpg">
 <meta property="og:image" content="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/wps20.jpg">
 <meta property="article:published_time" content="2023-06-07T08:56:02.680Z">
-<meta property="article:modified_time" content="2023-06-09T00:18:06.113Z">
+<meta property="article:modified_time" content="2023-06-09T00:23:47.164Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="搭建">
+<meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://weichunxiu123.github.io/wiki/hive%E5%AE%89%E8%A3%85/wps1.jpg">
     
@@ -187,6 +189,93 @@
                 <aside id="sidebar">
    
         
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/wiki/hive%E5%AE%89%E8%A3%85/">Hive基础配置</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Git安装与配置</a></li>  <li class="file"><a href="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">Docker安装与基本操作</a></li>  <li class="file"><a href="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">Spark--local模式配置</a></li>  <li class="file"><a href="/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-standalone环境部署</a></li>  <li class="file"><a href="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">spark-HA环境部署</a></li>  <li class="file"><a href="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">spark-YARN模式部署</a></li>  <li class="file"><a href="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/">Spark-pyspark基础编码环境</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
     
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
@@ -195,6 +284,56 @@
     <div class="article-inner">
         
         
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/spark/" rel="tag">spark</a>, <a class="tag-link-link" href="/tags/%E6%90%AD%E5%BB%BA/" rel="tag">搭建</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/hive%E5%AE%89%E8%A3%85/">
+            <time datetime="2023-06-07T08:56:02.680Z" itemprop="datePublished">2023-06-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/raw/master/source/_posts/hive安装.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/edit/master/source/_posts/hive安装.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/commits/master/source/_posts/hive安装.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Hive基础配置
+        </h1>
+    
+
+            </header>
+        
         
         <div class="article-entry" itemprop="articleBody">
         
@@ -202,8 +341,7 @@
             
         
         
-            <hr>
-<h2 id="​—title-hive安装toc-truedate-2023-06-07-16-56-02tags-搭建sparkcategories-工具​—"><a href="#​—title-hive安装toc-truedate-2023-06-07-16-56-02tags-搭建sparkcategories-工具​—" class="headerlink" title="​—title:hive安装toc:truedate:2023-06-07 16:56:02tags:搭建sparkcategories:工具​—"></a>​—<br>title:hive安装<br>toc:true<br>date:2023-06-07 16:56:02<br>tags:搭建spark<br>categories:工具<br>​—</h2><h2 id="一、Hive安装"><a href="#一、Hive安装" class="headerlink" title="一、Hive安装"></a>一、<strong>Hive安装</strong></h2><p><em><strong>*（1）*</strong></em><em><strong>*Mysql安装*</strong></em></p>
+            <h2 id="一、Hive安装"><a href="#一、Hive安装" class="headerlink" title="一、Hive安装"></a>一、<strong>Hive安装</strong></h2><p><em><strong>*（1）*</strong></em><em><strong>*Mysql安装*</strong></em></p>
 <p>1）卸载Centos7自带的mariadb</p>
 <img src="/wiki/hive%E5%AE%89%E8%A3%85/wps1.jpg" alt="img" style="zoom:115%;">
 
