@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>sqoop安装以及导入和导出 | weichunxiu123</title>
+    
+    
+        <meta name="keywords" content="sqoop,导入,导出">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="sqoop安装（1）首先需要有java、mysql、hadoop和hive环境 （2）将以下下载到CentOS系统中，对其解压    （3）解压在&#x2F;export&#x2F;server&#x2F;   tar xzf apache-flume-1.9.0-bin.tar.gz -C &#x2F;export&#x2F;server&#x2F;  （4）添加软连接： ln -s apach">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqoop安装以及导入和导出">
+<meta property="og:url" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/index.html">
+<meta property="og:site_name" content="weichunxiu123">
+<meta property="og:description" content="sqoop安装（1）首先需要有java、mysql、hadoop和hive环境 （2）将以下下载到CentOS系统中，对其解压    （3）解压在&#x2F;export&#x2F;server&#x2F;   tar xzf apache-flume-1.9.0-bin.tar.gz -C &#x2F;export&#x2F;server&#x2F;  （4）添加软连接： ln -s apach">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps1.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps2.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps3.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps4.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps5.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps6.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps7.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps8.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps9.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps10.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps11.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps12.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps13.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps14.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps15.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps16.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps17.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps18.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps19.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps20.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps21.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps22.png">
+<meta property="article:published_time" content="2023-06-14T10:14:47.696Z">
+<meta property="article:modified_time" content="2023-06-14T10:54:00.573Z">
+<meta property="article:author" content="Bigdata_weichunxiu">
+<meta property="article:tag" content="sqoop">
+<meta property="article:tag" content="导入">
+<meta property="article:tag" content="导出">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weichunxiu123.github.io/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps1.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="weichunxiu123" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/1.jpg">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">weichunxiu123</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/69.jpg">
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/69.jpg">
+            <h2 id="name">weichunxiu123</h2>
+            <h3 id="title">BigData &amp;&amp; Spark &amp;&amp; Kafka</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>jilin, China</span>
+            <a id="follow" target="_blank" href>FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/weichunxiu123/weichunxiu123.github.io" target="_blank" title="github" class="tooltip" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://stackoverflow.com/users/7277090/weichunxiu123?tab=profile" target="_blank" title="stack-overflow" class="tooltip" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-stack-overflow"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://codepen.io/weichunxiu123/" target="_blank" title="codepen" class="tooltip" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-codepen"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class="tooltip">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/hello-world/">第一个hexo</a></li>  <li class="file"><a href="/wiki/hive%E5%AE%89%E8%A3%85/">Hive基础配置</a></li>  <li class="file"><a href="/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Git安装与配置</a></li>  <li class="file"><a href="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">Docker安装与基本操作</a></li>  <li class="file"><a href="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">Spark-local模式配置</a></li>  <li class="file"><a href="/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-standalone环境部署</a></li>  <li class="file"><a href="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-HA环境部署</a></li>  <li class="file"><a href="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">Spark-YARN模式部署</a></li>  <li class="file"><a href="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/">Spark-pyspark基础编码环境</a></li>  <li class="file"><a href="/wiki/flume%E5%AE%89%E8%A3%85%E5%8F%8A%E6%B5%8B%E8%AF%95/">Fume安装及测试</a></li>  <li class="file"><a href="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">Fume测试以及综合案例</a></li>  <li class="file active"><a href="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/">sqoop安装以及导入和导出</a></li>  <li class="file"><a href="/wiki/%E5%AE%89%E8%A3%85zookeeper%E4%BB%A5%E5%8F%8AzookeeperJavaAPI%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">zookeeper安装以及zookeeperJavaAPI操作命令</a></li>  <li class="file"><a href="/wiki/%E5%AE%89%E8%A3%85kafka%E4%BB%A5%E5%8F%8Akafka%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">安装kafka以及kafka命令行操作</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-sqoop安装以及导入和导出" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/sqoop/" rel="tag">sqoop</a>, <a class="tag-link-link" href="/tags/%E5%AF%BC%E5%85%A5/" rel="tag">导入</a>, <a class="tag-link-link" href="/tags/%E5%AF%BC%E5%87%BA/" rel="tag">导出</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/">
+            <time datetime="2023-06-14T10:14:47.696Z" itemprop="datePublished">2023-06-14</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/raw/master/source/_posts/sqoop安装以及导入和导出.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/edit/master/source/_posts/sqoop安装以及导入和导出.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/commits/master/source/_posts/sqoop安装以及导入和导出.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            sqoop安装以及导入和导出
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h2 id="sqoop安装"><a href="#sqoop安装" class="headerlink" title="sqoop安装"></a><strong>sqoop安装</strong></h2><p>（1）首先需要有java、mysql、hadoop和hive环境</p>
+<p>（2）将以下下载到CentOS系统中，对其解压</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps1.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（3）解压在&#x2F;export&#x2F;server&#x2F;  </p>
+<pre class="line-numbers language-none"><code class="language-none">tar xzf apache-flume-1.9.0-bin.tar.gz -C &#x2F;export&#x2F;server&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>（4）添加软连接：</p>
+<pre class="line-numbers language-none"><code class="language-none">ln -s apache-flume-1.9.0-bin flume<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>（5）配置文件修改：</p>
+<p> vim &#x2F;etc&#x2F;profile</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps2.jpg" alt="img" style="zoom:100%;"> 
+
+<p>vi sqoop-env.sh</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps3.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（5）加入mysql的jdbc驱动包 cp &#x2F;export&#x2F;server&#x2F;hive&#x2F;lib&#x2F;mysql-connector-java-5.1.32.jar $SQOOP_HOME&#x2F;lib&#x2F;</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps4.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（7）验证启动</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;sqoop list-databases --connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F; --username root --password hadoop <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>本命令会列出所有mysql的数据库。 到这里，整个Sqoop安装工作完成。</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps5.jpg" alt="img" style="zoom:100%;">
+
+ 
+
+<h2 id="sqoop导入"><a href="#sqoop导入" class="headerlink" title="sqoop导入"></a><strong>sqoop导入</strong></h2><p>（1）Sqoop测试表数据 在mysql中创建数据库userdb ，然后执行并参考资料中的sql脚本。</p>
+<p>创建三张表: emp 雇员表、 emp_add 雇员地址表、 emp_conn 雇员联系表。</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps6.jpg" alt="img" style="zoom:100%;"> 
+
+ 
+
+<p><em><strong>（2）全量导入mysql表数据到HDFS</strong></em></p>
+<p>下面的命令用于从MySQL数据库服务器中的emp表导入HDFS</p>
+<pre class="line-numbers language-none"><code class="language-none">#example1-mysql-hdfs-start bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--delete-target-dir \ 
+--target-dir &#x2F;sqoop&#x2F;sqoopresult \ 
+--table emp --m 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps7.jpg" alt="img" style="zoom:100%;"> 
+
+<pre class="line-numbers language-none"><code class="language-none">#example2-mysql-hdfs-terminated 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--target-dir &#x2F;sqoop&#x2F;sqoopresult2 \ 
+--fields-terminated-by &#39;\t&#39; \ 
+--table emp --m 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps8.jpg" alt="img" style="zoom:100%;"> 
+
+<pre class="line-numbers language-none"><code class="language-none">#example3-mysql-hdfs-split
+bin&#x2F;sqoop import \
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \
+--username root \
+--password hadoop \
+--target-dir &#x2F;sqoop&#x2F;sqoopresult3 \
+--fields-terminated-by &#39;\t&#39; \
+--split-by id \
+--table emp --m 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps9.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>（3）全量导入mysql表数据到HIVE</strong></em></p>
+<p>先复制表结构到hive中再导入数据，在hive中新建数据库sqoop_test用于测试。</p>
+<pre class="line-numbers language-none"><code class="language-none">create database if not exists sqoop_test comment &quot;this is sqoop db&quot; with dbproperties(&#39;createdBy&#39;&#x3D;&#39;yzl&#39;); 
+use sqoop_test; 
+show tables; 
+desc formatted emp_add_sp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将关系型数据的表结构复制到hive中</p>
+<pre class="line-numbers language-none"><code class="language-none">#example4-1-mysql-hive-structure 
+bin&#x2F;sqoop create-hive-table \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--table emp_add \ 
+--username root \ 
+--password hadoop \ 
+--hive-table sqoop_test.emp_add_sp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从关系数据库导入文件到hive中</p>
+<pre class="line-numbers language-none"><code class="language-none">#example4-2-mysql-hive-data 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--table emp_add \ 
+--hive-table sqoop_test.emp_add_sp \ 
+--hive-import \ 
+--m 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps10.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>（4）导入表数据子集(where过滤)</strong></em></p>
+<pre class="line-numbers language-none"><code class="language-none">#example6-mysql-hdfs-where 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--where &quot;city &#x3D;&#39;sec-bad&#39;&quot; \ 
+--target-dir &#x2F;sqoop&#x2F;wherequery \ 
+--table emp_add --m 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps11.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>（5）导入表数据子集(query查询</strong></em></p>
+<pre class="line-numbers language-none"><code class="language-none">#example7-mysql-hdfs-query 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ --password hadoop \ 
+--target-dir &#x2F;sqoop&#x2F;wherequery2 \ 
+--query &#39;select id,name,deg from emp WHERE id&gt;1203 and $CONDITIONS&#39; \ 
+--split-by id \ 
+--fields-terminated-by &#39;\001&#39; \ 
+--m 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps12.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>（6）增量导入</strong></em></p>
+<p>Append模式增量导入，执行以下指令先将我们之前的数据导入。</p>
+<pre class="line-numbers language-none"><code class="language-none">#example8-1-mysql-hdfs-append 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--target-dir &#x2F;sqoop&#x2F;appendresult \ 
+--table emp --m 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用hdfs dfs -cat查看生成的数据文件，发现数据已经导入到hdfs中 然后在mysql的emp表中插入2条数据:</p>
+<pre class="line-numbers language-none"><code class="language-none">insert into &#96;userdb&#96;.&#96;emp&#96; (&#96;id&#96;, &#96;name&#96;, &#96;deg&#96;, &#96;salary&#96;, &#96;dept&#96;) values (&#39;1206&#39;, &#39;allen&#39;, &#39;admin&#39;, &#39;30000&#39;, &#39;tp&#39;); 
+insert into &#96;userdb&#96;.&#96;emp&#96; (&#96;id&#96;, &#96;name&#96;, &#96;deg&#96;, &#96;salary&#96;, &#96;dept&#96;) values (&#39;1207&#39;, &#39;woon&#39;, &#39;admin&#39;, &#39;40000&#39;, &#39;tp&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>执行如下的指令，实现增量的导入:</p>
+<pre class="line-numbers language-none"><code class="language-none">#example8-2-mysql-hdfs-append 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--table emp --m 1 \ 
+--target-dir &#x2F;sqoop&#x2F;appendresult \ 
+--incremental append \ 
+--check-column id \ 
+--last-value 1205<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps13.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>Lastmodified模式增量导入</strong></em></p>
+<p>（1）首先创建一个customer表，指定一个时间戳字段：</p>
+<pre class="line-numbers language-none"><code class="language-none">create table customertest(id int,name varchar(20),last_mod timestamp default current_timestamp on update current_timestamp);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>此处的时间戳设置为在数据的产生和更新时都会发生改变.</p>
+<p>（2）插入如下记录:</p>
+<pre class="line-numbers language-none"><code class="language-none">insert into customertest(id,name) values(1,&#39;neil&#39;); 
+insert into customertest(id,name) values(2,&#39;jack&#39;); 
+insert into customertest(id,name) values(3,&#39;martin&#39;); 
+insert into customertest(id,name) values(4,&#39;tony&#39;); 
+insert into customertest(id,name) values(5,&#39;eric&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>（3）此时执行sqoop指令将数据导入hdfs:</p>
+<pre class="line-numbers language-none"><code class="language-none">#example9-1-mysql-hdfs-Lastmodified 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--target-dir &#x2F;sqoop&#x2F;lastmodifiedresult \ 
+--table customertest --m 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>（4）再次插入一条数据进入customertest表</p>
+<pre class="line-numbers language-none"><code class="language-none">insert into customertest(id,name) values(6,&#39;james&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>（5）使用incremental的方式进行增量的导入:</p>
+<pre class="line-numbers language-none"><code class="language-none">#example9-2-mysql-hdfs-Lastmodified 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--table customertest \ 
+--target-dir &#x2F;sqoop&#x2F;lastmodifiedresult \ 
+--check-column last_mod \ 
+--incremental lastmodified \ 
+--last-value &quot;2019-05-28 18:42:06&quot; \ 
+--m 1 \ --append<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps14.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>Lastmodified模式:append、merge-key</strong></em></p>
+<p>使用lastmodified模式进行增量处理要指定增量数据是以append模式(附加) 和merge-key(合并)模式添加 。</p>
+<p>下面演示使用merge-by的模式进行增量更新 ：</p>
+<p>（1）我们去更新 id为1的name字段。</p>
+<pre class="line-numbers language-none"><code class="language-none">update customertest set name &#x3D; &#39;Neil&#39; where id &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>更新之后，这条数据的时间戳会更新为更新数据时的系统时间.</p>
+<p>（2）执行如下指令，把id字段作为merge-key:</p>
+<pre class="line-numbers language-none"><code class="language-none">#example10-mysql-hdfs-merge-key 
+bin&#x2F;sqoop import \ 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \ 
+--username root \ 
+--password hadoop \ 
+--table customertest \ 
+--target-dir &#x2F;sqoop&#x2F;lastmodifiedresult \ 
+--check-column last_mod \ 
+--incremental lastmodified \ 
+--last-value &quot;2019-05-28 18:42:06&quot; \ 
+--m 1 \ 
+--merge-key id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps15.jpg" alt="img" style="zoom:100%;">
+
+<h2 id="sqoop导出"><a href="#sqoop导出" class="headerlink" title="sqoop导出"></a><strong>sqoop导出</strong></h2><p>（1）准备HDFS数据</p>
+<p>在HDFS文件系统中“&#x2F;emp&#x2F;”目录的下创建一个文件emp_data.txt：mkdir &#x2F;export&#x2F;data&#x2F;sqoop-data&#x2F;emp&#x2F;</p>
+<p>vim emp_data.txt 添加如下内容：</p>
+<pre class="line-numbers language-none"><code class="language-none">1201,gopal,manager,50000,TP
+1202,manisha,preader,50000,TP
+1203,kalil,php dev,30000,AC
+1204,prasanth,php dev,30000,AC
+1205,kranthi,admin,20000,TP
+1206,satishp,grpdes,20000,GR<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps16.jpg" alt="img" style="zoom:100%;"> 
+
+<p>上传至hdfs：</p>
+<pre class="line-numbers language-none"><code class="language-none">hadoop fs -mkdir &#x2F;sqoop&#x2F;emp_data
+hadoop fs -put emp_data.txt &#x2F;sqoop&#x2F;emp_data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>（2）手动创建mysql中的目标表</p>
+<pre class="line-numbers language-none"><code class="language-none">mysql&gt; use userdb;
+mysql&gt; create table employee ( id int not null primary key, name varchar(20), deg varchar(20),salary int,dept varchar(10));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps17.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（3）执行导出命令：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;sqoop export --connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb --username root --password hadoop --table employee1 --columns id,name,deg,salary,dept --export-dir &#x2F;sqoop&#x2F;emp_data&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><em><strong>更新导出（updateonly模式）</strong></em></p>
+<p>（1）准备HDFS数据</p>
+<p>在HDFS文件系统中&#x2F;sqoop&#x2F;updateonly_1&#x2F;目录的下创建一个文件updateonly_1.txt：</p>
+<pre class="line-numbers language-none"><code class="language-none">1201,gopal,manager,50000
+1202,manisha,preader,50000
+1203,kalil,php dev,30000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps18.jpg" alt="img" style="zoom:100%;">
+
+<p>（2）手动创建mysql中的目标表</p>
+<pre class="line-numbers language-none"><code class="language-none">mysql&gt; USE userdb;
+mysql&gt; CREATE TABLE updateonly ( id INT NOT NULL PRIMARY KEY,  name VARCHAR(20), deg VARCHAR(20),salary INT);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps19.jpg" alt="img" style="zoom:100%;"> 
+
+<p>（3）先执行全部导出操作</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;sqoop export 
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb 
+--username root 
+--password hadoop 
+--table allowinsert 
+--export-dir &#x2F;sqoop&#x2F;allowinsert_1&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看此时的数据</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps20.jpg" alt="img" style="zoom:100%;">
+
+<p>（4）新增文件</p>
+<p>创建文件allowinsert_2.txt。修改前三条数据并且新增了一条记录。上传至 &#x2F;sqoop&#x2F;allowinsert_2&#x2F;目录下：</p>
+<pre class="line-numbers language-none"><code class="language-none">1201,gopal,manager,1212
+1202,manisha,preader,1313
+1203,kalil,php dev,1414
+1204,allen,java,1515<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps21.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2.6 执行更新导出</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;sqoop export \
+--connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F;userdb \
+--username root --password hadoop \
+--table allowinsert \
+--export-dir &#x2F;sqoop&#x2F;allowinsert_2&#x2F; \
+--update-key id \
+--update-mode allowinsert<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看最终结果</p>
+<img src="/wiki/sqoop%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA/wps22.png" alt="img" style="zoom:100%;">
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li>[1]sqoop配置文档.md</li>
+</ul>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/%E5%AE%89%E8%A3%85zookeeper%E4%BB%A5%E5%8F%8AzookeeperJavaAPI%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    zookeeper安装以及zookeeperJavaAPI操作命令
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Fume测试以及综合案例</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Bigdata_weichunxiu &copy; 2023 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
