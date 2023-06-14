@@ -193,6 +193,13 @@
   </url>
   
   <url>
+    <loc>https://weichunxiu123.github.io/tags/Hive/</loc>
+    <lastmod>2023-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://weichunxiu123.github.io/tags/%E5%88%9D%E8%AF%86/</loc>
     <lastmod>2023-06-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -201,13 +208,6 @@
   
   <url>
     <loc>https://weichunxiu123.github.io/tags/hexo/</loc>
-    <lastmod>2023-06-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://weichunxiu123.github.io/tags/Hive/</loc>
     <lastmod>2023-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
