@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Fume测试以及综合案例 | weichunxiu123</title>
+    
+    
+        <meta name="keywords" content="Flume,测试,案例">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Flume测试以及综合案例（1）拦截器Host Interceptor拦截器将运行agent的hostname 或者 IP地址写入到事件的headers中。 1）在 &#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf 中添加example8-interceptor.conf，内容如下： # 定义agent名称为a1 # 设置3个组件的名称 a1.sour">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fume测试以及综合案例">
+<meta property="og:url" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/index.html">
+<meta property="og:site_name" content="weichunxiu123">
+<meta property="og:description" content="Flume测试以及综合案例（1）拦截器Host Interceptor拦截器将运行agent的hostname 或者 IP地址写入到事件的headers中。 1）在 &#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf 中添加example8-interceptor.conf，内容如下： # 定义agent名称为a1 # 设置3个组件的名称 a1.sour">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps1.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps2.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps3.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps4.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps5.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps6.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps7.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps8.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps9.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps10.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps11.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps12.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps13.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps14.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps15.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps16.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps17.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps18.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps19.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps20.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps21.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps22.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps23.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps24.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps25.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps26.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps27.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps28.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps29.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps30.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps31.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps32.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps33.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps34.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps35.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps36.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps37.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps38.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps39.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps40.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps41.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps42.jpg">
+<meta property="og:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps43.jpg">
+<meta property="article:published_time" content="2023-06-14T08:03:25.939Z">
+<meta property="article:modified_time" content="2023-06-14T08:56:55.580Z">
+<meta property="article:author" content="Bigdata_weichunxiu">
+<meta property="article:tag" content="Flume">
+<meta property="article:tag" content="测试">
+<meta property="article:tag" content="案例">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weichunxiu123.github.io/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps1.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="weichunxiu123" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/1.jpg">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">weichunxiu123</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/69.jpg">
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/69.jpg">
+            <h2 id="name">weichunxiu123</h2>
+            <h3 id="title">BigData &amp;&amp; Spark</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>jilin, China</span>
+            <a id="follow" target="_blank" href>FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                11
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                11
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/weichunxiu123/weichunxiu123.github.io" target="_blank" title="github" class="tooltip" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://stackoverflow.com/users/7277090/weichunxiu123?tab=profile" target="_blank" title="stack-overflow" class="tooltip" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-stack-overflow"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://codepen.io/weichunxiu123/" target="_blank" title="codepen" class="tooltip" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-codepen"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class="tooltip">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/hello-world/">第一个hexo</a></li>  <li class="file"><a href="/wiki/hive%E5%AE%89%E8%A3%85/">Hive基础配置</a></li>  <li class="file"><a href="/wiki/Git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Git安装与配置</a></li>  <li class="file"><a href="/wiki/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">Docker安装与基本操作</a></li>  <li class="file"><a href="/wiki/Spark-local%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">Spark-local模式配置</a></li>  <li class="file"><a href="/wiki/Spark-standalone%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-standalone环境部署</a></li>  <li class="file"><a href="/wiki/spark-HA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Spark-HA环境部署</a></li>  <li class="file"><a href="/wiki/spark-YARN%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">Spark-YARN模式部署</a></li>  <li class="file"><a href="/wiki/Spark-pyspark%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A0%81%E7%8E%AF%E5%A2%83/">Spark-pyspark基础编码环境</a></li>  <li class="file"><a href="/wiki/flume%E5%AE%89%E8%A3%85%E5%8F%8A%E6%B5%8B%E8%AF%95/">Fume安装及测试</a></li>  <li class="file active"><a href="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">Fume测试以及综合案例</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-flume测试以及综合案例" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Flume/" rel="tag">Flume</a>, <a class="tag-link-link" href="/tags/%E6%A1%88%E4%BE%8B/" rel="tag">案例</a>, <a class="tag-link-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">
+            <time datetime="2023-06-14T08:03:25.939Z" itemprop="datePublished">2023-06-14</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/raw/master/source/_posts/flume测试以及综合案例.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/edit/master/source/_posts/flume测试以及综合案例.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/weichunxiu123/git@github.com:weichunxiu123/weichunxiu123.github.io.git/commits/master/source/_posts/flume测试以及综合案例.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Fume测试以及综合案例
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h2 id="Flume测试以及综合案例"><a href="#Flume测试以及综合案例" class="headerlink" title="Flume测试以及综合案例"></a><strong>Flume测试以及综合案例</strong></h2><h6 id="（1）拦截器"><a href="#（1）拦截器" class="headerlink" title="（1）拦截器"></a><strong>（1）拦截器</strong></h6><p>Host Interceptor拦截器将运行agent的hostname 或者 IP地址写入到事件的headers中。</p>
+<p>1）在 &#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf 中添加example8-interceptor.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none"># 定义agent名称为a1
+# 设置3个组件的名称
+a1.sources &#x3D; r1
+a1.sinks &#x3D; k1
+a1.channels &#x3D; c1
+# 配置source类型为NetCat,监听地址为本机，端口为44444
+a1.sources.r1.type &#x3D; netcat
+a1.sources.r1.bind &#x3D; 0.0.0.0
+a1.sources.r1.port &#x3D; 44444
+# 配置拦截器为host
+a1.sources.r1.interceptors &#x3D; i1 
+a1.sources.r1.interceptors.i1.type &#x3D; host
+# 配置sink类型为Logger
+a1.sinks.k1.type &#x3D; logger
+# 配置channel类型为内存，内存队列最大容量为1000，一个事务中从source接收的Events数量或者发送给sink的Events数量最大为100
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 100
+# 将source和sink绑定到channel上
+a1.sources.r1.channels &#x3D; c1
+a1.sinks.k1.channel &#x3D; c1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps1.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）、在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume（复制链接进入相同路径下，输入nc node1 44444输入内容进行测试，结果显示IP地址，测试成功）</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example8-interceptor.conf -Dflume.root.logger&#x3D;INFO,console <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps2.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>（2）Timestamp Interceptor拦截器</strong></em></p>
+<p>将当前时间写入到事件的headers中。</p>
+<p>1）将以下内容添加到&#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf的example8-inteptor.conf中：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources.r1.interceptors &#x3D; i1 i2
+a1.sources.r1.interceptors.i1.type &#x3D; host
+a1.sources.r1.interceptors.i2.type &#x3D; timestamp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps3.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume</p>
+<p>（与上一测试使用相同方法进行测试，结果显示timestanp，测试成功）</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example8-interceptor.conf -Dflume.root.logger&#x3D;INFO,console <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps4.jpg" alt="img" style="zoom:100%;"> 
+
+ 
+
+<p><em><strong>（2）Static Interceptor</strong></em></p>
+<p>运行用户对所有的事件添加固定的header</p>
+<p>1）将以下内容添加到&#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf的example8-interceptor.conf中：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources.r1.interceptors &#x3D; i1 i2 i3
+a1.sources.r1.interceptors.i1.type &#x3D; host
+a1.sources.r1.interceptors.i2.type &#x3D; timestamp
+a1.sources.r1.interceptors.i3.type &#x3D; static
+a1.sources.r1.interceptors.i3.key &#x3D; datacenter
+a1.sources.r1.interceptors.i3.value &#x3D; NEW_YORK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps5.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：（结果显示datacenter，则测试成功）</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example8-interceptor.conf -Dflume.root.logger&#x3D;INFO,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps6.jpg" alt="img" style="zoom:110%;">
+
+ 
+
+<p><em><strong>（4）UUID Interceptor</strong></em></p>
+<p>用于每个events header中生成一个UUID字符串，可以在sink中读取并使用</p>
+<p>1）将以下内容添加到&#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf的example8-interceptor.conf中：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources.r1.interceptors &#x3D; i1 i2 i3 i4
+a1.sources.r1.interceptors.i1.type &#x3D; host
+a1.sources.r1.interceptors.i2.type &#x3D; timestamp
+a1.sources.r1.interceptors.i3.type &#x3D; static
+a1.sources.r1.interceptors.i3.key &#x3D; datacenter
+a1.sources.r1.interceptors.i3.value &#x3D; NEW_YORK
+a1.sources.r1.interceptors.i4.type &#x3D; org.apache.flume.sink.solr.morphline.UUIDInterceptor$Builder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps7.jpg" alt="img" style="zoom:100%;"> 
+
+ 
+
+<p>2）在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：（显示字符串，则测试成功）</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example8-interceptor.conf -Dflume.root.logger&#x3D;INFO,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps8.jpg" alt="img" style="zoom:100%;">
+
+<p><em><strong>（5）Search and Replace Interceptor</strong></em></p>
+<p>用于将events中的正则匹配到的内容做相应的替换。</p>
+<p>1）将以下内容添加到&#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf的example8-interceptor.conf中：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources.r1.interceptors &#x3D; i1 i2 i3 i4 i5
+a1.sources.r1.interceptors.i1.type &#x3D; host
+a1.sources.r1.interceptors.i2.type &#x3D; timestamp
+a1.sources.r1.interceptors.i3.type &#x3D; static
+a1.sources.r1.interceptors.i3.key &#x3D; datacenter
+a1.sources.r1.interceptors.i3.value &#x3D; NEW_YORK
+a1.sources.r1.interceptors.i4.type &#x3D; org.apache.flume.sink.solr.morphline.UUIDInterceptor$Builder
+a1.sources.r1.interceptors.i5.type &#x3D; search_replace
+a1.sources.r1.interceptors.i5.searchPattern &#x3D; \\d&#123;6&#125;
+a1.sources.r1.interceptors.i5.replaceString &#x3D; ******1234<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps9.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example8-interceptor.conf -Dflume.root.logger&#x3D;INFO,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps10.jpg" alt="img" style="zoom:100%;">
+
+<p>3）复制node1链接，进入&#x2F;export&#x2F;server&#x2F;flume路径下，输入</p>
+<pre class="line-numbers language-none"><code class="language-none">nc node1 44444<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps11.jpg" alt="img" style="zoom:90%;"> 
+
+
+
+<p><em><strong>（6）自定义拦截器</strong></em></p>
+<p>1）在ldea中添加自定义拦截器</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps12.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）将项目打包复制到node1的&#x2F;export&#x2F;server&#x2F;flume&#x2F;lib路径下</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps13.jpg" alt="img" style="zoom:100%;"> 
+
+<p>3）在node1、node2中添加上游服务器设置example9-1-taildir-f-avro-interceptor.conf</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1
+a1.sources.r1.type &#x3D; TAILDIR
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.positionFile &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;taildir_position.json
+a1.sources.r1.filegroups &#x3D; g1
+a1.sources.r1.filegroups.g1 &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;app&#x2F;event.*
+#提高吞吐量
+a1.sources.r1.batchSize &#x3D; 1000
+#动态的header-keys eg：filepath&#x3D;&#x2F;..&#x2F;..&#x2F;..&#x2F;
+a1.sources.r1.fileHeaderKey &#x3D; filepath
+#拦截器配置,添加自定义拦截器
+a1.sources.r1.interceptors &#x3D; i1
+a1.sources.r1.interceptors.i1.type &#x3D; ccjz.rgzn.flume.EventTimestampInterceptor$EventTimestampInterceptorBuilder
+a1.sources.r1.interceptors.i1.tsFiledName &#x3D; timeStamp
+a1.sources.r1.interceptors.i1.keyName &#x3D; timestamp
+a1.sources.r1.interceptors.i1.toEncryFieldName &#x3D; account
+a1.channels.c1.type &#x3D; file
+#本机数据汇集检查点、event存储目录
+a1.channels.c1.checkpointDir &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;checkpoint
+a1.channels.c1.dataDirs &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;data
+a1.channels.c1.transactionCapacity &#x3D; 2000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; avro
+a1.sinks.k1.batch-size &#x3D; 1000
+#下游目标主机、端口
+a1.sinks.k1.hostname &#x3D; node3
+a1.sinks.k1.port &#x3D; 44444<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps14.jpg" alt="img" style="zoom:100%;">
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps15.jpg" alt="img" style="zoom:100%;"> 
+
+<p>4）在node3中添加下游服务器配置example9-2-avro-f-hdfs-interceptor.conf</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1
+#下游数据汇集avro source
+a1.sources.r1.type &#x3D; avro
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.bind &#x3D; 0.0.0.0
+a1.sources.r1.port &#x3D; 44444
+a1.sources.r1.threads &#x3D; 10
+a1.sources.r1.batchSize &#x3D; 1000
+a1.channels.c1.type &#x3D; file
+a1.channels.c1.checkpointDir &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;checkpoint
+a1.channels.c1.dataDirs &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;data
+a1.channels.c1.transactionCapacity &#x3D; 2000
+#hdfs sink
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; hdfs
+a1.sinks.k1.hdfs.path &#x3D; hdfs:&#x2F;&#x2F;node1:8020&#x2F;logdata-interceptor&#x2F;%Y-%m-%d&#x2F;%H&#x2F;
+#eg：文件名 logdata_34438hxfd.log，在滚动时，logdata_34438hxfd.log.tmp
+a1.sinks.k1.hdfs.filePrefix &#x3D; logdata_
+a1.sinks.k1.hdfs.fileSuffix &#x3D; .log
+#三个条件没有优先级，谁先达到就进行滚动
+#按时间间隔滚动
+a1.sinks.k1.hdfs.rollInterval &#x3D; 0
+#按文件大小滚动 256MB
+a1.sinks.k1.hdfs.rollSize &#x3D; 268435456
+#按event条数滚动
+a1.sinks.k1.hdfs.rollCount &#x3D; 100000
+a1.sinks.k1.hdfs.batchSize &#x3D; 1000
+a1.sinks.k1.hdfs.codeC &#x3D; gzip
+a1.sinks.k1.hdfs.fileType &#x3D; CompressedStream<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps16.jpg" alt="img" style="zoom:100%;">
+
+<p>5）在node1和node2中创建日志目录来生成模拟日志数据</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;app&#x2F;
+mkdir &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;app&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>6）在node3中&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example9-2-avro-f-hdfs-interceptor.conf -Dflume.root.logger&#x3D;DEBUG,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps17.jpg" alt="img" style="zoom:110%;">  
+
+<p>7）启动node1和node2上的flume agent</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example9-1-taildir-f-avro-interceptor.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps18.jpg" alt="img" style="zoom:110%;"> 
+
+<p>8）在hdfs上查看是否采集到数据</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps19.jpg" alt="img" style="zoom:110%;"> 
+
+<p><em><strong>（7）Channel选择器</strong></em></p>
+<p>Replicating Channel Selector中c2是一个可选的channel，写入c2失败的话会被忽略，c1没有标记为可选，如果写入c1失败会导致事务的失败</p>
+<p> 1）在 &#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf 中添加example10-channel-replicating.conf，</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.sinks &#x3D; k1 k2
+a1.channels &#x3D; c1 c2
+a1.sources.r1.type &#x3D; exec
+a1.sources.r1.channels &#x3D; c1 c2
+a1.sources.r1.command &#x3D; tail -F &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;logdata&#x2F;access.log
+a1.sources.r1.batchSize &#x3D; 1000
+a1.sources.r1.selector.type &#x3D; replicating
+a1.sources.r1.selector.optional &#x3D; c2
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 1000
+a1.channels.c2.type &#x3D; memory
+a1.channels.c2.capacity &#x3D; 1000
+a1.channels.c2.transactionCapacity &#x3D; 1000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; hdfs
+a1.sinks.k1.hdfs.path &#x3D; hdfs:&#x2F;&#x2F;node1:8020&#x2F;logdata_c1&#x2F;%Y-%m-%d&#x2F;%H&#x2F;
+a1.sinks.k1.hdfs.filePrefix &#x3D; logdata_
+a1.sinks.k1.hdfs.fileSuffix &#x3D; .log
+a1.sinks.k1.hdfs.rollInterval &#x3D; 0
+a1.sinks.k1.hdfs.rollSize &#x3D; 268435456
+a1.sinks.k1.hdfs.rollCount &#x3D; 0
+a1.sinks.k1.hdfs.batchSize &#x3D; 1000
+a1.sinks.k1.hdfs.fileType &#x3D; DataStream
+a1.sinks.k1.hdfs.useLocalTimeStamp &#x3D; true
+a1.sinks.k2.channel &#x3D; c2
+a1.sinks.k2.type &#x3D; hdfs
+a1.sinks.k2.hdfs.path &#x3D; hdfs:&#x2F;&#x2F;node1:8020&#x2F;logdata_c2&#x2F;%Y-%m-%d&#x2F;%H&#x2F;
+a1.sinks.k2.hdfs.filePrefix &#x3D; logdata_
+a1.sinks.k2.hdfs.fileSuffix &#x3D; .log
+a1.sinks.k2.hdfs.rollInterval &#x3D; 0
+a1.sinks.k2.hdfs.rollSize &#x3D; 268435456
+a1.sinks.k2.hdfs.rollCount &#x3D; 0
+a1.sinks.k2.hdfs.batchSize &#x3D; 1000
+a1.sinks.k2.hdfs.fileType &#x3D; DataStream
+a1.sinks.k2.hdfs.useLocalTimeStamp &#x3D; true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps20.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<p>bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example10-channel-replica</p>
+<p>ting.conf -Dflume.root.logger&#x3D;INFO,console</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps21.jpg" alt="img" style="zoom:100%;"> 
+
+<p><em><strong>（8）Multiplexing Channel Selector</strong></em></p>
+<p>可以根据event中的一个指定key的value来决定这条消息会写入哪个channel。</p>
+<p>1）在 &#x2F;export&#x2F;server&#x2F;flume&#x2F;myconf 中添加example11-channel-Multiplexing.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1 c2
+a1.sinks &#x3D; k1 k2
+a1.sources.r1.type &#x3D; TAILDIR
+a1.sources.r1.channels &#x3D; c1 c2
+a1.sources.r1.positionFile &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;taildir_position.json
+a1.sources.r1.filegroups &#x3D; g1 g2
+a1.sources.r1.filegroups.g1 &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;weblog&#x2F;web.*
+a1.sources.r1.filegroups.g2 &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;wxlog&#x2F;wx.*
+a1.sources.r1.headers.g1.logtype &#x3D; web
+a1.sources.r1.headers.g2.logtype &#x3D; wx
+a1.sources.r1.selector.type &#x3D; multiplexing
+a1.sources.r1.selector.header &#x3D; logtype
+a1.sources.r1.selector.mapping.web &#x3D; c1
+a1.sources.r1.selector.mapping.wx &#x3D; c2
+a1.sources.r1.selector.default &#x3D; c2
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 1000
+a1.channels.c2.type &#x3D; memory
+a1.channels.c2.capacity &#x3D; 1000
+a1.channels.c2.transactionCapacity &#x3D; 1000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; hdfs
+a1.sinks.k1.hdfs.path &#x3D; hdfs:&#x2F;&#x2F;node1:8020&#x2F;%&#123;logtype&#125;&#x2F;%Y-%m-%d&#x2F;%H&#x2F;
+a1.sinks.k1.hdfs.filePrefix &#x3D; logdata_
+a1.sinks.k1.hdfs.fileSuffix &#x3D; .log
+a1.sinks.k1.hdfs.rollInterval &#x3D; 0
+a1.sinks.k1.hdfs.rollSize &#x3D; 268435456
+a1.sinks.k1.hdfs.rollCount &#x3D; 0
+a1.sinks.k1.hdfs.batchSize &#x3D; 1000
+a1.sinks.k1.hdfs.fileType &#x3D; DataStream
+a1.sinks.k1.hdfs.useLocalTimeStamp &#x3D; true
+a1.sinks.k2.channel &#x3D; c2
+a1.sinks.k2.type &#x3D; hdfs
+a1.sinks.k2.hdfs.path &#x3D; hdfs:&#x2F;&#x2F;node1:8020&#x2F;%&#123;logtype&#125;&#x2F;%Y-%m-%d&#x2F;%H&#x2F;
+a1.sinks.k2.hdfs.filePrefix &#x3D; logdata_
+a1.sinks.k2.hdfs.fileSuffix &#x3D; .log
+a1.sinks.k2.hdfs.rollInterval &#x3D; 0
+a1.sinks.k2.hdfs.rollSize &#x3D; 268435456
+a1.sinks.k2.hdfs.rollCount &#x3D; 0
+a1.sinks.k2.hdfs.batchSize &#x3D; 1000
+a1.sinks.k2.hdfs.fileType &#x3D; DataStream
+a1.sinks.k2.hdfs.useLocalTimeStamp &#x3D; true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps22.jpg" alt="img" style="zoom:110%;"> 
+
+<p>2）在&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example11-channel-Multiplexing.conf -Dflume.root.logger&#x3D;INFO,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps23.jpg" alt="img" style="zoom:100%;"> 
+
+<p>3）在hdfs上查看</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps24.jpg" alt="img" style="zoom:110%;">
+
+<p><em><strong>（9）Sink处理器实例</strong></em></p>
+<p>Failover Sink Processor是一组中只有优先级高的那个sink在工作，另一个是等待中，如果高优先级的sink发送数据失败，则专用低优先级的sink去工作，并且，在配置时间penalty之后，还会尝试用高优先级的去发送数据</p>
+<p>1）在node1上配置上游服务器example12-1-sink-failover.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1 k2
+a1.sources.r1.type &#x3D; exec
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.command &#x3D; tail -F &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;logdata&#x2F;access.log
+a1.sources.r1.batchSize &#x3D; 1000
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 1000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; avro
+a1.sinks.k1.hostname &#x3D; node2
+a1.sinks.k1.port &#x3D; 44444
+a1.sinks.k1.batch-size &#x3D; 1000
+a1.sinks.k2.channel &#x3D; c1
+a1.sinks.k2.type &#x3D; avro
+a1.sinks.k2.hostname &#x3D; node3
+a1.sinks.k2.port &#x3D; 44444
+a1.sinks.k2.batch-size &#x3D; 1000
+a1.sinkgroups &#x3D; g1
+a1.sinkgroups.g1.sinks &#x3D; k1 k2
+a1.sinkgroups.g1.processor.type &#x3D; failover
+a1.sinkgroups.g1.processor.priority.k1 &#x3D; 200
+a1.sinkgroups.g1.processor.priority.k2 &#x3D; 100
+a1.sinkgroups.g1.processor.maxpenalty &#x3D; 5000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps25.jpg" alt="img" style="zoom:100%;">  
+
+<p>2）在node2、node3上配置下游服务器example12-2-sink-failover.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1
+a1.sources.r1.type &#x3D; avro
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.bind &#x3D; 0.0.0.0
+a1.sources.r1.port &#x3D; 44444
+a1.sources.r1.threads &#x3D; 10
+a1.sources.r1.batchSize &#x3D; 1000
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 1000
+a1.sinks.k1.type &#x3D; logger
+a1.sinks.k1.channel &#x3D; c1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps26.jpg" alt="img" style="zoom:100%;"> 
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps27.jpg" alt="img" style="zoom:100%;"> 
+
+<p>3）在node3中&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example12-2-sink-failover.conf -Dflume.root.logger&#x3D;DEBUG,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps28.jpg" alt="img" style="zoom:100%;"> 
+
+<p>4）启动node1和node2上的flume agent</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example12-1-sink-failover.Conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><em><strong>（10）Load balancing Sink Processor</strong></em></p>
+<p>允许channel中的数据在一组sink中的多个sink之间进行交替</p>
+<p>1）在node1上配置上游服务器example13-1-sink-loadbalance.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1 k2
+a1.sources.r1.type &#x3D; exec
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.command &#x3D; tail -F &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;logdata&#x2F;access.log
+a1.sources.r1.batchSize &#x3D; 1000
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 1000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; avro
+a1.sinks.k1.hostname &#x3D; node2
+a1.sinks.k1.port &#x3D; 44444
+a1.sinks.k1.batch-size &#x3D; 1000
+a1.sinks.k2.channel &#x3D; c1
+a1.sinks.k2.type &#x3D; avro
+a1.sinks.k2.hostname &#x3D; node3
+a1.sinks.k2.port &#x3D; 44444
+a1.sinks.k2.batch-size &#x3D; 1000
+a1.sinkgroups &#x3D; g1
+a1.sinkgroups.g1.sinks &#x3D; k1 k2
+a1.sinkgroups.g1.processor.type &#x3D; load_balance
+a1.sinkgroups.g1.processor.backoff &#x3D; true 
+a1.sinkgroups.g1.processor.selector &#x3D; round_robin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps29.jpg" alt="img" style="zoom:100%;"> 
+
+<p>2）在node2、node3上配置下游服务器example13-2-sink-loadbalance.conf内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1
+a1.sources.r1.type &#x3D; avro
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.bind &#x3D; 0.0.0.0
+a1.sources.r1.port &#x3D; 44444
+a1.sources.r1.threads &#x3D; 10
+a1.sources.r1.batchSize &#x3D; 1000
+a1.channels.c1.type &#x3D; memory
+a1.channels.c1.capacity &#x3D; 1000
+a1.channels.c1.transactionCapacity &#x3D; 1000
+a1.sinks.k1.type &#x3D; logger
+a1.sinks.k1.channel &#x3D; c1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps30.jpg" alt="img" style="zoom:100%;"> 
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps31.jpg" alt="img" style="zoom:100%;"> 
+
+<p>3）在node3中&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example13-2-sink-loadbala
+nce.conf -Dflume.root.logger&#x3D;DEBUG,console<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps32.jpg" alt="img" style="zoom:100%;"> 
+
+<p>4）启动node1和node2上的flume agent</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example13-1-sink-loadbalance.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps33.jpg" alt="img" style="zoom:100%;"> 
+
+<h6 id="（11）Flume综合实战案例"><a href="#（11）Flume综合实战案例" class="headerlink" title="（11）Flume综合实战案例"></a><em><strong>（11）Flume综合实战案例</strong></em></h6><p>1）准备一个MySQL服务器，创建一个库：realtimedw，字符集选择utf8，防止中文乱码：</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps34.jpg" alt="img" style="zoom:90%;"> 
+
+<p>2）将事先准备好的realtimedw.sql、t_md_areas.sql两个sql文件导入到realtimedw库中：</p>
+<p>3）在node1中创建一个目录，用来存放配置文件：</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;loginit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps35.jpg" alt="img" style="zoom:100%;"> 
+
+<p>4）修改log_gen_app.jar、log_gen_wx.jar的配置文件中的other.properties,内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">#logger,kafka
+sink.type&#x3D;logger
+#roll console dayroll
+logger.type&#x3D;dayroll
+initdata.releasechannel&#x3D;&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;loginit&#x2F;releasechannel.txt
+initdata.phoneinfo&#x3D;&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;loginit&#x2F;phoneinfo.txt
+initdata.eventIds&#x3D;&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;loginit&#x2F;eventIds.txt
+init.user.area&#x3D;&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;loginit&#x2F;area.txt
+db.url&#x3D;jdbc:mysql:&#x2F;&#x2F;127.0.0.1:3306&#x2F;realtimedw?
+useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;useSSL&#x3D;false
+db.user&#x3D;root
+db.password&#x3D;hadoop
+# max concurrent accessor amount
+online.max.num&#x3D;1000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>5）log_gen_app.jar的配置文件log4j.properties，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">log4j.rootLogger&#x3D;INFO,trace
+log4j.appender.trace&#x3D;org.apache.log4j.ConsoleAppender
+log4j.appender.trace.Threshold&#x3D;DEBUG
+log4j.appender.trace.ImmediateFlush&#x3D;true
+log4j.appender.trace.Target&#x3D;System.out
+log4j.appender.trace.layout&#x3D;org.apache.log4j.PatternLayout
+log4j.appender.trace.layout.ConversionPattern&#x3D;[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n
+log4j.logger.console &#x3D; INFO,console
+log4j.additivity.console&#x3D;false
+log4j.appender.console&#x3D;org.apache.log4j.ConsoleAppender
+log4j.appender.console.Threshold&#x3D;DEBUG
+log4j.appender.console.ImmediateFlush&#x3D;true
+log4j.appender.console.Target&#x3D;System.out
+log4j.appender.console.layout&#x3D;org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern&#x3D;%m%n
+# log4j.logger.roll &#x3D; INFO,rollingFile
+# log4j.additivity.roll&#x3D;false
+# log4j.appender.rollingFile&#x3D;org.apache.log4j.RollingFileAppender
+# log4j.appender.rollingFile.Threshold&#x3D;DEBUG
+# log4j.appender.rollingFile.ImmediateFlush&#x3D;true
+# log4j.appender.rollingFile.Append&#x3D;true
+# log4j.appender.rollingFile.File&#x3D;&#x2F;loggen&#x2F;logdata&#x2F;wx&#x2F;event.log
+# log4j.appender.rollingFile.MaxFileSize&#x3D;120MB
+# log4j.appender.rollingFile.MaxBackupIndex&#x3D;50
+# log4j.appender.rollingFile.layout&#x3D;org.apache.log4j.PatternLayout
+# log4j.appender.rollingFile.layout.ConversionPattern&#x3D;%m%n
+log4j.logger.dayroll &#x3D; INFO,DailyRolling
+log4j.additivity.dayroll&#x3D;false
+log4j.appender.DailyRolling&#x3D;org.apache.log4j.DailyRollingFileAppender
+log4j.appender.DailyRolling.File&#x3D;&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;gen_logdata&#x2F;event_log_app
+log4j.appender.DailyRolling.DatePattern&#x3D;yyyy-MM-dd&#39;.log&#39;
+log4j.appender.DailyRolling.layout&#x3D;org.apache.log4j.PatternLayout
+log4j.appender.DailyRolling.layout.ConversionPattern&#x3D;%m%n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps36.jpg" alt="img" style="zoom:100%;"> 
+
+<p>6）修改log_gen_wx.jar的配置文件log4j.properties</p>
+<pre class="line-numbers language-none"><code class="language-none">log4j.rootLogger&#x3D;INFO,trace
+log4j.appender.trace&#x3D;org.apache.log4j.ConsoleAppender
+log4j.appender.trace.Threshold&#x3D;DEBUG
+log4j.appender.trace.ImmediateFlush&#x3D;true
+log4j.appender.trace.Target&#x3D;System.out
+log4j.appender.trace.layout&#x3D;org.apache.log4j.PatternLayout
+log4j.appender.trace.layout.ConversionPattern&#x3D;[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n
+log4j.logger.console &#x3D; INFO,console
+log4j.additivity.console&#x3D;false
+log4j.appender.console&#x3D;org.apache.log4j.ConsoleAppender
+log4j.appender.console.Threshold&#x3D;DEBUG
+log4j.appender.console.ImmediateFlush&#x3D;true
+log4j.appender.console.Target&#x3D;System.out
+log4j.appender.console.layout&#x3D;org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern&#x3D;%m%n
+# log4j.logger.roll &#x3D; INFO,rollingFile
+# log4j.additivity.roll&#x3D;false
+# log4j.appender.rollingFile&#x3D;org.apache.log4j.RollingFileAppender
+# log4j.appender.rollingFile.Threshold&#x3D;DEBUG\# log4j.appender.rollingFile.ImmediateFlush&#x3D;true
+# log4j.appender.rollingFile.Append&#x3D;true
+# log4j.appender.rollingFile.File&#x3D;&#x2F;loggen&#x2F;logdata&#x2F;wx&#x2F;event.log
+# log4j.appender.rollingFile.MaxFileSize&#x3D;120MB
+# log4j.appender.rollingFile.MaxBackupIndex&#x3D;50
+# log4j.appender.rollingFile.layout&#x3D;org.apache.log4j.PatternLayout
+# log4j.appender.rollingFile.layout.ConversionPattern&#x3D;%m%n
+log4j.logger.dayroll &#x3D; INFO,DailyRolling
+log4j.additivity.dayroll&#x3D;false
+log4j.appender.DailyRolling&#x3D;org.apache.log4j.DailyRollingFileAppender
+log4j.appender.DailyRolling.File&#x3D;&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;gen_logdata&#x2F;event_log_wx
+log4j.appender.DailyRolling.DatePattern&#x3D;yyyy-MM-dd&#39;.log&#39;
+log4j.appender.DailyRolling.layout&#x3D;org.apache.log4j.PatternLayout
+log4j.appender.DailyRolling.layout.ConversionPattern&#x3D;%m%n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>7）将以下文件上传到&#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;loginit路径下：</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps37.jpg" alt="img" style="zoom:110%;"> 
+
+<p>8）给shell文件授权，并启动日志生成器：</p>
+<pre class="line-numbers language-none"><code class="language-none">chmod +x genapplog.sh
+chmod +x genwxlog.sh
+sh genapplog.sh
+sh genwxlog.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>9）查看jps</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps38.jpg" alt="img" style="zoom:100%;"> 
+
+<p>10）进入&#x2F;export&#x2F;data&#x2F;flume-example&#x2F;gen_logdata下查看日志文件生成效果：</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps39.jpg" alt="img" style="zoom:100%;"> 
+
+<p>11）在node1、node2中配置上游服务器example14-1-Comprehensive-practical.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1 k2
+a1.sources.r1.type &#x3D; TAILDIR
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.positionFile &#x3D; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;taildir_position.json
+a1.sources.r1.filegroups &#x3D; g1
+a1.sources.r1.filegroups.g1 &#x3D;  &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;gen_logdata&#x2F;event_.*
+a1.sources.r1.batchSize &#x3D; 1000
+a1.sources.r1.interceptors &#x3D; i1 i2 i3
+a1.sources.r1.interceptors.i1.type &#x3D; ccjz.rgzn.flume.EncryptSpecifiedFieldInterceptor$EncryptInterceptorBuilder
+a1.sources.r1.interceptors.i1.toEncryFieldName &#x3D; account
+a1.sources.r1.interceptors.i2.type &#x3D; ccjz.rgzn.flume.EventTimeStampExtractInterceptor$EventTimestampInterceptorBuilder
+a1.sources.r1.interceptors.i2.tsFiledName &#x3D; timeStamp
+a1.sources.r1.interceptors.i2.keyName &#x3D; timestamp
+\#拥有openid的是wx小程序用户日志
+a1.sources.r1.interceptors.i3.type &#x3D; ccjz.rgzn.flume.LogTypeInterceptor$LogTypeInterceptorBuilder
+a1.sources.r1.interceptors.i3.flag.fieldname &#x3D; openid
+a1.sources.r1.interceptors.i3.headerKey &#x3D; logtype
+a1.channels.c1.type &#x3D; file
+a1.channels.c1.checkpointDir &#x3D;  &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;checkpoint
+a1.channels.c1.dataDirs &#x3D;  &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata&#x2F;data
+a1.channels.c1.transactionCapacity &#x3D; 2000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; avro
+a1.sinks.k1.hostname &#x3D; node2
+a1.sinks.k1.port &#x3D; 44444
+a1.sinks.k1.batch-size &#x3D; 1000
+a1.sinks.k2.channel &#x3D; c1
+a1.sinks.k2.type &#x3D; avro
+a1.sinks.k2.hostname &#x3D; node3
+a1.sinks.k2.port &#x3D; 44444
+a1.sinks.k2.batch-size &#x3D; 1000
+a1.sinkgroups &#x3D; g1
+a1.sinkgroups.g1.sinks &#x3D; k1 k2
+a1.sinkgroups.g1.processor.type &#x3D; failover
+a1.sinkgroups.g1.processor.priority.k1 &#x3D; 200
+a1.sinkgroups.g1.processor.priority.k2 &#x3D; 100
+a1.sinkgroups.g1.processor.maxpenalty &#x3D; 5000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps40.jpg" alt="img" style="zoom:110%;"> 
+
+<p>12）在node2、node3中配置下游服务器example14-2-Comprehensive-practical.conf，内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">a1.sources &#x3D; r1
+a1.channels &#x3D; c1
+a1.sinks &#x3D; k1
+a1.sources.r1.type &#x3D; avro
+a1.sources.r1.channels &#x3D; c1
+a1.sources.r1.bind &#x3D; 0.0.0.0
+a1.sources.r1.port &#x3D; 44444
+a1.sources.r1.threads &#x3D; 10
+a1.sources.r1.batchSize &#x3D; 1000
+a1.channels.c1.type &#x3D; file
+a1.channels.c1.checkpointDir &#x3D;  &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata_2&#x2F;checkpoint
+a1.channels.c1.dataDirs &#x3D;  &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;flumedata_2&#x2F;data
+a1.channels.c1.transactionCapacity &#x3D; 2000
+a1.sinks.k1.channel &#x3D; c1
+a1.sinks.k1.type &#x3D; hdfs
+a1.sinks.k1.hdfs.path &#x3D; hdfs:&#x2F;&#x2F;node1:8020&#x2F;gen_logdata&#x2F;%&#123;logtype&#125;&#x2F;%Y-%m-%d&#x2F;
+a1.sinks.k1.hdfs.filePrefix &#x3D; logdata_
+a1.sinks.k1.hdfs.fileSuffix &#x3D; .log
+a1.sinks.k1.hdfs.rollInterval &#x3D; 300
+a1.sinks.k1.hdfs.rollSize &#x3D; 268435456
+a1.sinks.k1.hdfs.rollCount &#x3D; 0
+a1.sinks.k1.hdfs.batchSize &#x3D; 1000
+a1.sinks.k1.hdfs.codeC &#x3D; gzip
+a1.sinks.k1.hdfs.fileType &#x3D; CompressedStream<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps41.jpg" alt="img" style="zoom:110%;"> 
+
+<p>13）将node1、node2、node3机器上之前的一些flumedata目录清除；</p>
+<p>14）在node1、node2中创建日志数据目录，在此目录下创建log1、log2、log3文件夹。</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;export&#x2F;data&#x2F;flume-example&#x2F;weblog<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>15）在node2、node3中&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example14-2-Comprehensive-practical.conf -Dflume.root.logger&#x3D;DEBUG,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>16）在&#x2F;export&#x2F;data&#x2F;flume-example&#x2F;weblog路径下，</p>
+<p>输入for i in {i..10000}模拟往3类日志中写入日志：</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt;do
+&gt;echo $&#123;i&#125;-access,1389999,asdb,ccc,ddd,eee,fff &gt;&gt; log1&#x2F;access.log
+&gt;echo $&#123;i&#125;-nginx,1389999,asdb,ccc,ddd,eee,fff &gt;&gt; log2&#x2F;nginx.log
+&gt;echo $&#123;i&#125;-weblog,1389999,asdb,ccc,ddd,eee,fff &gt;&gt; log3&#x2F;weblog.log
+&gt;sleep 0.2
+&gt;done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps42.jpg" alt="img"> </p>
+<p>17）在node1中&#x2F;export&#x2F;server&#x2F;flume路径下启动flume：</p>
+<pre class="line-numbers language-none"><code class="language-none">bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example14-1-Comprehensive-practical.conf -Dflume.root.logger&#x3D;DEBUG,console<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>18）在hdfs上查看结果，数据上传成功</p>
+<img src="/wiki/flume%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/wps43.jpg" alt="img" style="zoom:110%;">
+
+ 
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li>[1]Flume安装测试文档.md</li>
+</ul>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/flume%E5%AE%89%E8%A3%85%E5%8F%8A%E6%B5%8B%E8%AF%95/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Fume安装及测试</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Bigdata_weichunxiu &copy; 2023 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
