@@ -6,7 +6,7 @@
   <link href="https://weichunxiu123.github.io/atom.xml" rel="self"/>
   
   <link href="https://weichunxiu123.github.io/"/>
-  <updated>2023-06-14T11:55:24.718Z</updated>
+  <updated>2023-06-19T09:12:23.100Z</updated>
   <id>https://weichunxiu123.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>kafka-eagle部署与使用</title>
+    <link href="https://weichunxiu123.github.io/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
+    <id>https://weichunxiu123.github.io/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/</id>
+    <published>2023-06-19T08:39:03.660Z</published>
+    <updated>2023-06-19T09:12:23.100Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Kafka-Eagle部署流程与运维监控"><a href="#Kafka-Eagle部署流程与运维监控" class="headerlink" title="Kafka Eagle部署流程与运维监控"></a>Kafka Eagle部署流程与运维监控</h2><p>Kafka Eagle是一个监控系统，监控Kafka集群以及偏移量、生产者、消费者等等。通过Kafka Eagle可以看到当前的消费者组，对于每个组，它们正在使用的主题以及该组在每个主题中的偏移量，消费积压等等。因此对于了解消息队列消费的速度以及消息队列消息写入的速度非常的有用。可以帮助我们调试Kafka的生产者和消费者，也可以对Kafka系统的整体运行情况有一个宏观的了解。</p><h3 id="1-1-1具体部署流程"><a href="#1-1-1具体部署流程" class="headerlink" title="1.1.1具体部署流程"></a>1.1.1具体部署流程</h3><p>（1）下载kafka eagle，下载地址：<a href="http://download.kafka-eagle.org/">http://download.kafka-eagle.org/</a></p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/1.png" alt="img" style="zoom:50%;"><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/3.png" alt="img" style="zoom:60%;"><p>（2）解压Kafka Eagle</p><pre class="line-numbers language-none"><code class="language-none">cd &#x2F;export&#x2F;softwaretar -zxvf kafka-eagle-bin-2.1.0.gz -C &#x2F;export&#x2F;server&#x2F;tar -zxvf kafka-eagle-web-2.0.2-bin.tar.gz -C &#x2F;export&#x2F;server&#x2F;mv kafka-eagle-web-2.0.2 kafka-eagle<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/5.png" alt="img" style="zoom:80%;"><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/7.png" alt="img" style="zoom:80%;"><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/9.png" alt="img" style="zoom:80%;"><p>（3）修改&#x2F;etc&#x2F;profile</p><pre class="line-numbers language-none"><code class="language-none">添加环境变量:JAVA_HOME 和 KE_HOMEexport JAVA_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;jdkexport PATH&#x3D;$PATH:$JAVA_HOME&#x2F;binexport KE_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;kafka-eagleexport PATH&#x3D;$PATH:$KE_HOME&#x2F;bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>（4）配置 KafkaEagle</p><pre class="line-numbers language-none"><code class="language-none">cd &#x2F;export&#x2F;server&#x2F;kafka-eagle&#x2F;conf vi system-config.properties<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>1）修改以下配置：</p><pre class="line-numbers language-none"><code class="language-none">kafka.eagle.zk.cluster.alias&#x3D;cluster1cluster1.zk.list&#x3D;node1:2181,node2:2181,node3:2181cluster1.kafka.eagle.broker.size&#x3D;3 kafka.eagle.url&#x3D;jdbc:sqlite:&#x2F;export&#x2F;data&#x2F;db&#x2F;ke.db<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>2）启动前需要手动创建&#x2F;export&#x2F;data&#x2F;db目录</p><pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;export&#x2F;data&#x2F;db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>（5）启动Eagle</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;export&#x2F;server&#x2F;kafka-eagle&#x2F;bin&#x2F;ke.sh start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/11.png" alt="img" style="zoom:80%;"><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/13.png" alt="img" style="zoom:40%;"><h3 id="1-1-2-kafka-Eagle使用"><a href="#1-1-2-kafka-Eagle使用" class="headerlink" title="1.1.2 kafka Eagle使用"></a>1.1.2 kafka Eagle使用</h3><p>（1）Dashboard</p><p>展示kafka集群的Topic数量，消费者数量，kafka的Brokers数，以及所属的Zookeeper集群信息。Dashboard信息截图如下：</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/13.png" alt="img" style="zoom:40%;"> <p>（2）Topic </p><p>在Topic模块下，包含创建Topic和展示Topic信息详情。</p><p>1）Create 通过创建模块可以创建一个自定义分区的备份数的Topic，如下图所示：</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/17.png" alt="img" style="zoom:40%;"> <p>2）List </p><p>该模块下列出kafka集群中所有的Topic，包含Topic的分区数，创建时间以及修改时间，如下图所示：</p><p>​      <img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/19.png" alt="img" style="zoom:30%;"></p><p>![img](.&#x2F;kafka-eagle部署与使用&#x2F;37</p><p>上图中，每一个Topic名称下对应一个详情的超链接，通过该超链接可以查看该Topic的详情。如分区索引号、Leader、Replicas等，如下图所示：</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/22.png" alt="img" style="zoom:40%;"><p> 3）Mock 直接通过kafka-eagle来发送信息</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/23.png" alt="img" style="zoom:40%;"><p>或者我们可以通过命令行来消费Topic中的信息；</p><pre class="line-numbers language-none"><code class="language-none">bin&#x2F;kafka-console-consumer.sh --topic tpc_12 --from-beginning --bootstrap-server 192.168.88.161:9092<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/24.png" alt="img" style="zoom:80%;"> <p>4）KSQL </p><p>该模块通过SQL语句来查询Topic中的信息。</p><pre class="line-numbers language-none"><code class="language-none">select * from tpc_12 where &#96;partition&#96; in (0) limit 10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/25.png" alt="img" style="zoom:60%;"><p>（3）Consumers </p><p>该模块显示有消费记录的Topic信息，其中包括索引ID号、Active Topic Graph和Offsets Rate Graph</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/26.png" alt="img" style="zoom:50%;"><p>（4）Kafka-eagle 监控功能</p><p>1）开启kafka监控功能，需要修改kafka的启动脚本，暴露JMX的端口。</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/27.png" alt="img" style="zoom:80%;"><p>查看监控页面</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/28.png" alt="img" style="zoom:50%;"><p>（4）kafka-eagle的可视化监控大屏</p><p>展示消费者和生产者当日及最近7天趋势、kafka集群读写速度、kafka集群历史总记录等。</p><img src="/wiki/kafka-eagle%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/20.jpg" alt="img" style="zoom:110%;"> ]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Kafka-Eagle部署流程与运维监控&quot;&gt;&lt;a href=&quot;#Kafka-Eagle部署流程与运维监控&quot; class=&quot;headerlink&quot; title=&quot;Kafka Eagle部署流程与运维监控&quot;&gt;&lt;/a&gt;Kafka Eagle部署流程与运维监控&lt;/h2&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="工具" scheme="https://weichunxiu123.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="kafka" scheme="https://weichunxiu123.github.io/tags/kafka/"/>
+    
+  </entry>
   
   <entry>
     <title>安装kafka以及kafka命令行操作</title>
